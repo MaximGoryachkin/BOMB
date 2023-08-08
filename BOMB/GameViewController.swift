@@ -11,37 +11,41 @@ class GameViewController: UIViewController {
     
     private lazy var startButton: UIButton = {
         var button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         button.backgroundColor = .purple
         button.setTitle("Запустить", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button)
         return button
     }()
     
     private lazy var bombImage: UIImageView = {
         var imageView = UIImageView()
+        imageView.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         imageView.image = UIImage(named:"gameBomb")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(imageView)
         return imageView
     }()
     
     private lazy var textLabel: UILabel = {
         var label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         label.text = "Нажимте Запустить, чтобы начать игру"
         label.textColor = .purple
         label.contentMode = .scaleAspectFill
         label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
         return label
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(textLabel)
+        view.addSubview(startButton)
+        view.addSubview(bombImage)
         setupConstraints()
+        pressedStartButton()
 
     }
     
@@ -56,5 +60,14 @@ class GameViewController: UIViewController {
         bombImage.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: 20).isActive = true
         bombImage.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 20).isActive = true
     }
-
+    
+    private func pressedStartButton() {
+        startButton.addTarget(self, action: #selector(hideButton), for: .touchUpInside)
+    }
+    
+    @objc func hideButton() {
+        startButton.isHidden = true
+    }
+    
+    
 }

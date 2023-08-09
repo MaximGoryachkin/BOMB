@@ -22,7 +22,7 @@ struct QuestionModel {
                                                          "По мотивам книг",
                                                          "Как проводили лето Финес и Ферб?",
                                                          "Экземпляр с возрастным ограничением 16+"],
-                                             isChoose: false)
+                                             isChoose: true)
     var geographyCategorie = QuestionCategory(category: .geography,
                                               questions: ["Представитель фауны Австралии",
                                                           "Гора Европы",
@@ -39,7 +39,7 @@ struct QuestionModel {
                                                           "Страна Южной Америки",
                                                           "Остров Японии",
                                                           "Столица африканскиой страны"],
-                                              isChoose: false)
+                                              isChoose: true)
     var scienceCategorie = QuestionCategory(category: .science,
                                             questions: ["Самая классная область науки",
                                                         "Знаменитый ученый",
@@ -53,38 +53,41 @@ struct QuestionModel {
                                                         "Соль - NaCl, следующий... ",
                                                         "Назови динозавра",
                                                         "Созвездие на небосводе",
-                                                        "",
-                                                        "",
-                                                        ""],
-                                            isChoose: false)
+                                                        ],
+                                            isChoose: true)
     
-    func setQuestion() -> String {
-        var resultArray = [String]()
+    var resultArray = [String]()
+    
+    mutating func setQuestion() -> String {
+        guard let index = (0..<resultArray.count).randomElement() else { return "Question is end" }
+        return resultArray.remove(at: index)
+    }
+    
+    mutating func addQuestions() {
+        resultArray = []
         
-        switch true {
-        case multfilmCategorie.isChoose:
+        if multfilmCategorie.isChoose {
             resultArray += multfilmCategorie.questions
-        case geographyCategorie.isChoose:
+        }
+        if geographyCategorie.isChoose {
             resultArray += geographyCategorie.questions
-        case scienceCategorie.isChoose:
+        }
+        if scienceCategorie.isChoose {
             resultArray += scienceCategorie.questions
+        }
+    }
+    
+    mutating func update(categoryName: String) {
+        switch categoryName {
+        case Category.multfilm.rawValue:
+            multfilmCategorie.isChoose.toggle()
+        case Category.geography.rawValue:
+            geographyCategorie.isChoose.toggle()
+        case Category.science.rawValue:
+            scienceCategorie.isChoose.toggle()
         default:
             print("Not match")
         }
-        
-        return resultArray.randomElement() ?? ""
     }
     
-    mutating func update(categoryName: Category) {
-        switch categoryName {
-        case .multfilm:
-            multfilmCategorie.isChoose.toggle()
-        case .geography:
-            geographyCategorie.isChoose.toggle()
-        case .science:
-            scienceCategorie.isChoose.toggle()
-        }
-        print("Model - \(multfilmCategorie.isChoose)")
-        print(setQuestion())
-    }
 }

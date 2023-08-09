@@ -6,7 +6,7 @@
 //
 
 struct QuestionCategory {
-    let name: Category
+    let category: Category
     let questions: [String]
     var isChoose: Bool
 }

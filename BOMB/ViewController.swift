@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol CheckCategoryProtocol: AnyObject {
-    func updateModel(for name: String)
-}
 
 class ViewController: UIViewController {
     

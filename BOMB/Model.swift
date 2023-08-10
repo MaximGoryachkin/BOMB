@@ -88,6 +88,7 @@ struct QuestionModel {
         default:
             print("Not match")
         }
+        print(scienceCategorie.isChoose)
     }
     
 }

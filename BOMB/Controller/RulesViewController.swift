@@ -11,7 +11,6 @@ class RulesViewController: UIViewController {
     
     let scrollView = UIScrollView()
     let contentView = UIView()
-    let navBar = UINavigationBar(frame: .zero)
     
     lazy var rulesTitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -66,11 +65,26 @@ class RulesViewController: UIViewController {
         return label
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+              
+        configureNavBar()
         setupScrollView()
+    }
+    
+    func configureNavBar() {
+        navigationItem.title = "Помощь"
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.purple]
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.isTranslucent = false
+        
+        navigationItem.backBarButtonItem?.tintColor = .black
+        
     }
     
     func setupScrollView(){
@@ -113,8 +127,5 @@ class RulesViewController: UIViewController {
             categoriesHelpLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16)
         ])
     }
-    
-    @IBAction func didTapBack() {
-        self.dismiss(animated: true)
-    }
 }
+

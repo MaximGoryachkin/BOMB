@@ -30,8 +30,8 @@ class ViewController: UIViewController {
         ])
     }
 
-    @IBAction func didTapTestButton() {
-        present(rulesVC, animated: true)
+    @objc func didTapTestButton() {
+        navigationController?.pushViewController(rulesVC, animated: true)
     }
 
 }

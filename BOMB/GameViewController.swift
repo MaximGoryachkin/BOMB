@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GameViewController: UIViewController {
     
@@ -13,6 +14,7 @@ class GameViewController: UIViewController {
     
     var timer = Timer()
     var counter = 30
+    var audioPlayer: AVPlayer!
     
     private lazy var startButton: UIButton = {
         var button = UIButton(type: .system)
@@ -103,12 +105,27 @@ class GameViewController: UIViewController {
     }
     
     @objc func timerAction() {
-        counter -= 1
-        labelTimer.text = "\(counter)"
         
-        if counter == 0 {
+        if counter > 0 {
+            soundOfTimer()
+            labelTimer.text = "\(counter)"
+            counter -= 1
+        } else if counter == 0  {
             timer.invalidate()
-            present(GameEndViewController(), animated: true)
+            soundOfBoom()
+            present (GameEndViewController(), animated:  true)
         }
+    }
+    
+    private func soundOfTimer() {
+        let url = Bundle.main.url(forResource: "taimer", withExtension: "mp3")
+        audioPlayer = AVPlayer.init(url: url!)
+        audioPlayer.play()
+    }
+    
+    private func soundOfBoom() {
+        let url = Bundle.main.url(forResource: "vzryiv-bombyi", withExtension: "mp3")
+        audioPlayer = AVPlayer.init(url: url!)
+        audioPlayer.play()
     }
 }

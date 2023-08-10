@@ -22,7 +22,7 @@ class RulesViewController: UIViewController {
     }()
     
     lazy var rulesHelpLabel: UILabel = {
-        var label = UILabel(frame: .zero)
+        let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         
@@ -65,10 +65,26 @@ class RulesViewController: UIViewController {
         return label
     }()
     
+    lazy var categoriesContainer: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    lazy var category: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .purple
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 15
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        scrollView.backgroundColor = .white
               
         configureNavBar()
         setupScrollView()
@@ -98,6 +114,9 @@ class RulesViewController: UIViewController {
         scrollView.addSubview(rulesHelpLabel)
         scrollView.addSubview(categoriesTitleLabel)
         scrollView.addSubview(categoriesHelpLabel)
+        scrollView.addSubview(categoriesContainer)
+        
+        categoriesContainer.addSubview(category)
         
         NSLayoutConstraint.activate([
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -122,9 +141,21 @@ class RulesViewController: UIViewController {
             categoriesTitleLabel.topAnchor.constraint(equalTo: rulesHelpLabel.bottomAnchor, constant: 16),
             
             categoriesHelpLabel.topAnchor.constraint(equalTo: categoriesTitleLabel.bottomAnchor, constant: 16),
-            categoriesHelpLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16),
+//            categoriesHelpLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16),
             categoriesHelpLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            categoriesHelpLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16)
+            categoriesHelpLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            
+            categoriesContainer.topAnchor.constraint(equalTo: categoriesHelpLabel.bottomAnchor, constant: 16),
+            categoriesContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            categoriesContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            categoriesContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16),
+        
+            category.topAnchor.constraint(equalTo: categoriesContainer.bottomAnchor, constant: 16),
+            category.leadingAnchor.constraint(equalTo: categoriesContainer.leadingAnchor, constant: 16),
+            category.trailingAnchor.constraint(equalTo: categoriesContainer.trailingAnchor, constant: -16),
+            category.bottomAnchor.constraint(equalTo: categoriesContainer.bottomAnchor, constant: 16)
+        
+            
         ])
     }
 }

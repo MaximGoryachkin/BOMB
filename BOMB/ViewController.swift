@@ -120,14 +120,14 @@ class ViewController: UIViewController {
         boomb.frame.size.height = 30
         boomb.textAlignment = .center
         boomb.text = "БОМБА"
-        boomb.font = UIFont(name: "Chalkduster", size: 50)
+        boomb.font = UIFont(name: "AcsiomaSuperShockC", size: 70)
         return boomb
     }()
     
     lazy var boombLableSecond: UILabel = {
         let boombText = UILabel()
         boombText.text = "игра для компании"
-        boombText.font = UIFont(name: "Chalkduster", size: 17)
+        boombText.font = UIFont(name: "AcsiomaSuperShockC", size: 25)
         return boombText
     }()
     
@@ -140,6 +140,10 @@ class ViewController: UIViewController {
         stackVerticalIV.backgroundColor = .red
         return stackVerticalIV
     } ()
+    
+    override func viewWillLayoutSubviews() {
+        <#code#>
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,7 +193,12 @@ class ViewController: UIViewController {
             helpBtn.heightAnchor.constraint(equalToConstant: diameterBtn),
             helpBtn.widthAnchor.constraint(equalToConstant: diameterBtn)
         ])
-
+        for family: String in UIFont.familyNames {
+                    print(family)
+                    for names: String in UIFont.fontNames(forFamilyName: family){
+                        print("==\(names)==")
+                    }
+                }
     }
     
     @objc func newGameBtn(){

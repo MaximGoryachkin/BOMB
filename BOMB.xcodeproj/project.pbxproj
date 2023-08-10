@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2666EB402A84F8F6004A3B4A /* Acsiomasupershockc.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2666EB3F2A84F8F5004A3B4A /* Acsiomasupershockc.otf */; };
 		89F1AB672A80FEA200B6A6DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F1AB662A80FEA200B6A6DA /* AppDelegate.swift */; };
 		89F1AB692A80FEA200B6A6DA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F1AB682A80FEA200B6A6DA /* SceneDelegate.swift */; };
 		89F1AB6B2A80FEA200B6A6DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F1AB6A2A80FEA200B6A6DA /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2666EB3F2A84F8F5004A3B4A /* Acsiomasupershockc.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Acsiomasupershockc.otf; sourceTree = "<group>"; };
 		89F1AB632A80FEA200B6A6DA /* BOMB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BOMB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F1AB662A80FEA200B6A6DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89F1AB682A80FEA200B6A6DA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,9 +39,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2666EB3E2A84F898004A3B4A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2666EB3F2A84F8F5004A3B4A /* Acsiomasupershockc.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		89F1AB5A2A80FEA200B6A6DA = {
 			isa = PBXGroup;
 			children = (
+				2666EB3E2A84F898004A3B4A /* Fonts */,
 				89F1AB652A80FEA200B6A6DA /* BOMB */,
 				89F1AB642A80FEA200B6A6DA /* Products */,
 			);
@@ -125,6 +136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2666EB402A84F8F6004A3B4A /* Acsiomasupershockc.otf in Resources */,
 				89F1AB732A80FEA200B6A6DA /* LaunchScreen.storyboard in Resources */,
 				89F1AB702A80FEA200B6A6DA /* Assets.xcassets in Resources */,
 				89F1AB6E2A80FEA200B6A6DA /* Main.storyboard in Resources */,

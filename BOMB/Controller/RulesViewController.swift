@@ -36,7 +36,7 @@ class RulesViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
@@ -160,8 +160,6 @@ class RulesViewController: UIViewController {
             NSLayoutConstraint.activate([
                 imageView.topAnchor.constraint(equalTo: container.topAnchor),
                 imageView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-//                imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-//                imageView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
                 imageView.bottomAnchor.constraint(equalTo: container.bottomAnchor)
             ])
             
@@ -230,6 +228,7 @@ class RulesViewController: UIViewController {
             durationImage.translatesAutoresizingMaskIntoConstraints = false
             durationImage.image = image
             durationImage.contentMode = .scaleAspectFill
+            durationImage.setContentHuggingPriority(.defaultLow, for: .horizontal)
             
             let descriptionLabel = UILabel(frame: .zero)
             descriptionLabel.text = text
@@ -237,19 +236,19 @@ class RulesViewController: UIViewController {
             descriptionLabel.numberOfLines = 0
             descriptionLabel.font = .boldSystemFont(ofSize: 22)
             descriptionLabel.textAlignment = .center
+            descriptionLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             
             container.addSubview(durationImage)
             container.addSubview(descriptionLabel)
             
             NSLayoutConstraint.activate([
                 durationImage.topAnchor.constraint(equalTo: container.topAnchor),
-                durationImage.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 24),
+                durationImage.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 8),
                 durationImage.bottomAnchor.constraint(equalTo: container.bottomAnchor),
                 
-//                descriptionLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 8),
                 descriptionLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor),
-                descriptionLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
-                descriptionLabel.leadingAnchor.constraint(equalTo: durationImage.trailingAnchor, constant: 16)
+                descriptionLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -8),
+                descriptionLabel.leadingAnchor.constraint(equalTo: durationImage.trailingAnchor, constant: 8)
             ])
             
         case .text(let text):

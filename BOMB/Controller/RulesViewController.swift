@@ -16,7 +16,6 @@ class RulesViewController: UIViewController {
     func configureNavBar() {
         navigationItem.title = "Помощь"
         navigationController?.navigationBar.barStyle = .default
-        //            navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.purple]
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
@@ -40,86 +39,53 @@ class RulesViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        createRulesScreen()
-        createCategoriesScreen()
+        create(pagesFrom: [model.rulesPageRows, model.categoriesPageRows, model.settingsPageRows])
     }
     
-    
-    func createRulesScreen() {
-        
+    func create(pagesFrom pages: [[RulesCellViewModel]]) {
         var lastView: UIView?
         var lastContainerView: UIView?
         
-        let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        for row in model.rulesPageRows {
-            let row = make(rowFor: row)
-            containerView.addSubview(row)
+        for (index, page) in pages.enumerated() {
+            let containerView = UIView()
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            
+            for row in page {
+                let row = make(rowFor: row)
+                containerView.addSubview(row)
+                
+                NSLayoutConstraint.activate([
+                    row.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                    row.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                    row.topAnchor.constraint(equalTo: lastView?.bottomAnchor ?? containerView.topAnchor)
+                ])
+                
+                lastView = row
+            }
+            
+            if let lastView {
+                containerView.bottomAnchor.constraint(equalTo: lastView.bottomAnchor).isActive = true
+            }
+            
+            scrollView.addSubview(containerView)
             
             NSLayoutConstraint.activate([
-                row.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                row.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                row.topAnchor.constraint(equalTo: lastView?.bottomAnchor ?? containerView.topAnchor)
+                containerView.leadingAnchor.constraint(equalTo: lastContainerView?.trailingAnchor ?? scrollView.contentLayoutGuide.leadingAnchor),
+                containerView.topAnchor.constraint(equalTo: scrollView.frameLayoutGuide.topAnchor),
+                containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+                containerView.bottomAnchor.constraint(greaterThanOrEqualTo: scrollView.contentLayoutGuide.bottomAnchor)
+//                scrollView.contentLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualTo: )
             ])
             
-            lastView = row
-        }
-        
-        scrollView.addSubview(containerView)
-        
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: lastContainerView?.trailingAnchor ?? scrollView.contentLayoutGuide.leadingAnchor),
-            containerView.topAnchor.constraint(equalTo: scrollView.frameLayoutGuide.topAnchor),
-            containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
-            containerView.bottomAnchor.constraint(equalTo: scrollView.frameLayoutGuide.bottomAnchor)
-        ])
-        
-        lastContainerView = containerView
-        lastView = nil
-        
-        NSLayoutConstraint.activate([
-            containerView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
-        ])
-    }
-    
-    func createCategoriesScreen() {
-        var lastView: UIView?
-        
-        let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        for row in model.categoriesPageRows {
-            let row = make(rowFor: row)
-            containerView.addSubview(row)
+            lastContainerView = containerView
+            lastView = nil
             
-            NSLayoutConstraint.activate([
-                row.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                row.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                row.topAnchor.constraint(equalTo: lastView?.bottomAnchor ?? containerView.topAnchor)
-            ])
-            
-            lastView = row
+            if index == pages.endIndex - 1 {
+                containerView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
+            }
         }
-        
-        scrollView.addSubview(containerView)
-        
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: scrollView.subviews.first?.trailingAnchor ?? scrollView.contentLayoutGuide.leadingAnchor),
-            containerView.topAnchor.constraint(equalTo: scrollView.frameLayoutGuide.topAnchor),
-            containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
-            containerView.bottomAnchor.constraint(equalTo: scrollView.frameLayoutGuide.bottomAnchor)
-        ])
-    
-        lastView = nil
-        
-        NSLayoutConstraint.activate([
-            containerView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            containerView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor)
-        ])
     }
     
     func make(rowFor viewModel: RulesCellViewModel) -> UIView {
@@ -173,6 +139,7 @@ class RulesViewController: UIViewController {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.font = .boldSystemFont(ofSize: 40)
             label.textAlignment = .center
+            label.numberOfLines = 0
             label.textColor = UIColor(named: "purple")
             container.addSubview(label)
             

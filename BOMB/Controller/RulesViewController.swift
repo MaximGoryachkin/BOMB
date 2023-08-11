@@ -121,10 +121,10 @@ class RulesViewController: UIViewController {
             NSLayoutConstraint.activate([
                 imageView.topAnchor.constraint(equalTo: container.topAnchor),
                 imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-                imageView.heightAnchor.constraint(equalToConstant: 60),
-                imageView.widthAnchor.constraint(equalToConstant: 60),
-                label.topAnchor.constraint(equalTo: container.topAnchor, constant: 8),
-                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -8),
+                imageView.heightAnchor.constraint(equalToConstant: 70),
+                imageView.widthAnchor.constraint(equalToConstant: 70),
+                label.topAnchor.constraint(equalTo: container.topAnchor, constant: 4),
+                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -4),
                 label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor),
                 label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
             ])
@@ -145,7 +145,7 @@ class RulesViewController: UIViewController {
             
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: container.topAnchor),
-                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: 8),
+                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -8),
                 label.leadingAnchor.constraint(equalTo: container.leadingAnchor),
                 label.trailingAnchor.constraint(equalTo: container.trailingAnchor),
             ])
@@ -159,8 +159,9 @@ class RulesViewController: UIViewController {
             container.addSubview(imageView)
             NSLayoutConstraint.activate([
                 imageView.topAnchor.constraint(equalTo: container.topAnchor),
-                imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+                imageView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+//                imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+//                imageView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
                 imageView.bottomAnchor.constraint(equalTo: container.bottomAnchor)
             ])
             
@@ -171,8 +172,8 @@ class RulesViewController: UIViewController {
             titleRight.text = right?.0
             titleLeft.textColor = .white
             titleRight.textColor = .white
-            titleLeft.font = .boldSystemFont(ofSize: 20)
-            titleRight.font = .boldSystemFont(ofSize: 20)
+            titleLeft.font = .systemFont(ofSize: 16)
+            titleRight.font = .systemFont(ofSize: 16)
             titleLeft.textAlignment = .center
             titleRight.textAlignment = .center
             titleLeft.numberOfLines = 0
@@ -223,6 +224,50 @@ class RulesViewController: UIViewController {
             ])
             
             categoryContainerRight.isHidden = (titleRight.text ?? "").isEmpty
+            
+        case .timeDurationLabel(let image, let text):
+            let durationImage = UIImageView(frame: .zero)
+            durationImage.translatesAutoresizingMaskIntoConstraints = false
+            durationImage.image = image
+            durationImage.contentMode = .scaleAspectFill
+            
+            let descriptionLabel = UILabel(frame: .zero)
+            descriptionLabel.text = text
+            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+            descriptionLabel.numberOfLines = 0
+            descriptionLabel.font = .boldSystemFont(ofSize: 22)
+            descriptionLabel.textAlignment = .center
+            
+            container.addSubview(durationImage)
+            container.addSubview(descriptionLabel)
+            
+            NSLayoutConstraint.activate([
+                durationImage.topAnchor.constraint(equalTo: container.topAnchor),
+                durationImage.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 24),
+                durationImage.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+                
+//                descriptionLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 8),
+                descriptionLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+                descriptionLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+                descriptionLabel.leadingAnchor.constraint(equalTo: durationImage.trailingAnchor, constant: 16)
+            ])
+            
+        case .text(let text):
+            let label = UILabel(frame: .zero)
+            label.text = text
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = .boldSystemFont(ofSize: 22)
+            label.textAlignment = .center
+            label.numberOfLines = 0
+            label.textColor = .black
+            container.addSubview(label)
+            
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: container.topAnchor, constant: 12),
+                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -12),
+                label.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 4),
+                label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -4),
+            ])
         }
         
         return container

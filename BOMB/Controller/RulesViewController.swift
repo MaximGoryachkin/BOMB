@@ -64,7 +64,8 @@ class RulesViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         var lastView: UIView?
@@ -75,7 +76,7 @@ class RulesViewController: UIViewController {
             let containerView = UIView()
             containerView.translatesAutoresizingMaskIntoConstraints = false
             
-            for row in model.rows {
+            for row in model.rulesPageRows {
                 let row = make(rowFor: row)
                 containerView.addSubview(row)
                 

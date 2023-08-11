@@ -11,4 +11,5 @@ enum RulesCellViewModel {
     case imageAndText(UIImage?, String)
     case title(String)
     case image(UIImage)
+    case twoImagesLabel(left: (String, String)?, right: (String, String)?)
 }

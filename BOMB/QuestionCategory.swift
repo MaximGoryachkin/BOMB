@@ -9,6 +9,7 @@ struct QuestionCategory {
     let category: Category
     let questions: [String]
     var isChoose: Bool
+    let imageName: String?
 }
 
 enum Category: String {

@@ -22,7 +22,8 @@ struct QuestionModel {
                                                          "По мотивам книг",
                                                          "Как проводили лето Финес и Ферб?",
                                                          "Экземпляр с возрастным ограничением 16+"],
-                                             isChoose: true)
+                                             isChoose: true,
+                                             imageName: nil)
     var geographyCategorie = QuestionCategory(category: .geography,
                                               questions: ["Представитель фауны Австралии",
                                                           "Гора Европы",
@@ -39,7 +40,8 @@ struct QuestionModel {
                                                           "Страна Южной Америки",
                                                           "Остров Японии",
                                                           "Столица африканскиой страны"],
-                                              isChoose: true)
+                                              isChoose: true,
+                                              imageName: nil)
     var scienceCategorie = QuestionCategory(category: .science,
                                             questions: ["Самая классная область науки",
                                                         "Знаменитый ученый",
@@ -54,7 +56,8 @@ struct QuestionModel {
                                                         "Назови динозавра",
                                                         "Созвездие на небосводе",
                                                         ],
-                                            isChoose: true)
+                                            isChoose: true,
+                                            imageName: nil)
     
     var resultArray = [String]()
     

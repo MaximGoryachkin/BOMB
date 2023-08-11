@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2603704E2A86214A00D79D50 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2603704D2A86214A00D79D50 /* UIButton.swift */; };
 		2666EB402A84F8F6004A3B4A /* Acsiomasupershockc.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2666EB3F2A84F8F5004A3B4A /* Acsiomasupershockc.otf */; };
+		26A154232A86708A00A281FE /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A154222A86708A00A281FE /* CategoryViewController.swift */; };
 		26DA14FA2A85F8F500C59C4F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DA14F92A85F8F500C59C4F /* UIColor.swift */; };
 		26DA14FC2A86024B00C59C4F /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DA14FB2A86024B00C59C4F /* UIImage.swift */; };
 		89F1AB672A80FEA200B6A6DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F1AB662A80FEA200B6A6DA /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		2603704D2A86214A00D79D50 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		2666EB3F2A84F8F5004A3B4A /* Acsiomasupershockc.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Acsiomasupershockc.otf; sourceTree = "<group>"; };
+		26A154222A86708A00A281FE /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		26DA14F92A85F8F500C59C4F /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		26DA14FB2A86024B00C59C4F /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		89F1AB632A80FEA200B6A6DA /* BOMB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BOMB.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 				89F1AB662A80FEA200B6A6DA /* AppDelegate.swift */,
 				89F1AB682A80FEA200B6A6DA /* SceneDelegate.swift */,
 				89F1AB6A2A80FEA200B6A6DA /* MainViewController.swift */,
+				26A154222A86708A00A281FE /* CategoryViewController.swift */,
 				89F1AB6C2A80FEA200B6A6DA /* Main.storyboard */,
 				89F1AB6F2A80FEA200B6A6DA /* Assets.xcassets */,
 				89F1AB712A80FEA200B6A6DA /* LaunchScreen.storyboard */,
@@ -169,6 +172,7 @@
 			files = (
 				89F1AB6B2A80FEA200B6A6DA /* MainViewController.swift in Sources */,
 				26DA14FC2A86024B00C59C4F /* UIImage.swift in Sources */,
+				26A154232A86708A00A281FE /* CategoryViewController.swift in Sources */,
 				89F1AB672A80FEA200B6A6DA /* AppDelegate.swift in Sources */,
 				89F1AB692A80FEA200B6A6DA /* SceneDelegate.swift in Sources */,
 				26DA14FA2A85F8F500C59C4F /* UIColor.swift in Sources */,

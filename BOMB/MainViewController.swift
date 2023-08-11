@@ -173,36 +173,23 @@ class MainViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.addSubview(background)
-        view.addSubview(stackVertView)
-        stackVertView.addArrangedSubview(logo)
-        logo.addSubview(stackVertImageView)
-        stackVertImageView.addArrangedSubview(boombLable)
-        stackVertImageView.addArrangedSubview(boombLableSecond)
-        stackVertView.addArrangedSubview(gameBtn)
-        stackVertView.addArrangedSubview(continueBtn)
-        stackVertView.addArrangedSubview(categoriesBtn)
-        view.addSubview(stackHorizView)
-        stackVertView.addArrangedSubview(stackHorizView)
-        view.addSubview(settingsBtn)
-        view.addSubview(helpBtn)
-        stackHorizView.addArrangedSubview(settingsBtn)
-        stackHorizView.addArrangedSubview(helpBtn)
-        
+        //stackVertView constraint (super stack)
         NSLayoutConstraint.activate([
             stackVertView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             stackVertView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             stackVertView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            stackVertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            stackVertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        ])
+        //stackVertImageView constraint (boombLable, boombLableSecond)
+        NSLayoutConstraint.activate([
             stackVertImageView.trailingAnchor.constraint(equalTo: logo.trailingAnchor, constant: 0),
             stackVertImageView.leadingAnchor.constraint(equalTo: logo.leadingAnchor, constant: 0),
             stackVertImageView.bottomAnchor.constraint(equalTo: logo.bottomAnchor, constant: 0),
             boombLableSecond.bottomAnchor.constraint(equalTo: stackVertImageView.bottomAnchor, constant: 0),
             boombLable.bottomAnchor.constraint(equalTo: boombLableSecond.topAnchor, constant: 10),
+        ])
+        //stackVertView - constraint (logo Bomb, gameBtn, continueBtn, categoriesBtn, stackHorizView)
+        NSLayoutConstraint.activate([
             logo.topAnchor.constraint(equalTo: stackVertView.topAnchor, constant: 20),
             gameBtn.widthAnchor.constraint(equalToConstant: widthBtn),
             gameBtn.heightAnchor.constraint(equalToConstant: heightBtn),
@@ -216,12 +203,36 @@ class MainViewController: UIViewController {
             stackHorizView.leadingAnchor.constraint(equalTo: stackVertView.leadingAnchor, constant: 25),
             stackHorizView.trailingAnchor.constraint(equalTo: stackVertView.trailingAnchor, constant: -25),
             stackHorizView.bottomAnchor.constraint(equalTo: stackVertView.bottomAnchor, constant: 0),
+        ])
+        //stackHorizView constraint (settingsBtn, helpBtn)
+        NSLayoutConstraint.activate([
             stackHorizView.heightAnchor.constraint(equalToConstant: diameterBtn),
             settingsBtn.heightAnchor.constraint(equalToConstant: diameterBtn),
             settingsBtn.widthAnchor.constraint(equalToConstant: diameterBtn),
             helpBtn.heightAnchor.constraint(equalToConstant: diameterBtn),
             helpBtn.widthAnchor.constraint(equalToConstant: diameterBtn)
         ])
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addViews(views: background, stackVertView, stackHorizView, settingsBtn, helpBtn)
+        addViewInStack(stack: stackVertView, views: logo, gameBtn, continueBtn,categoriesBtn, stackHorizView)
+        addViewInStack(stack: stackHorizView, views: settingsBtn, helpBtn)
+        logo.addSubview(stackVertImageView)
+        addViewInStack(stack: stackVertImageView, views: boombLable, boombLableSecond)
+    }
+    
+    func addViews(views: UIView...){
+        for view in views {
+            self.view.addSubview(view)
+        }
+    }
+    
+    func addViewInStack(stack: UIStackView, views: UIView...){
+        for view in views {
+            stack.addArrangedSubview(view)
+        }
     }
     
     @objc func newGameBtn(){

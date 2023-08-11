@@ -8,6 +8,9 @@
 import UIKit
 
 class CategoryViewController: UIViewController {
+    
+    var delegate: CheckCategoryProtocol!
+    
     lazy var background: UIImageView = {
         let backgroundImageView = UIImageView()
         backgroundImageView.frame.size.width = view.frame.width
@@ -29,7 +32,6 @@ class CategoryViewController: UIViewController {
         return stackVerticalView
     } ()
     
-    
     lazy var stackHorizViewOne: UIStackView = {
         let stackHorizontalView = UIStackView()
         stackHorizontalView.axis = .horizontal
@@ -41,6 +43,7 @@ class CategoryViewController: UIViewController {
         //self.view.addSubview(stackHorizontalView)
         return stackHorizontalView
     } ()
+    
     lazy var stackHorizViewTwo: UIStackView = {
         let stackHorizontalView = UIStackView()
         stackHorizontalView.axis = .horizontal
@@ -52,6 +55,7 @@ class CategoryViewController: UIViewController {
         //self.view.addSubview(stackHorizontalView)
         return stackHorizontalView
     } ()
+    
     lazy var stackHorizViewThree: UIStackView = {
         let stackHorizontalView = UIStackView()
         stackHorizontalView.axis = .horizontal
@@ -64,16 +68,13 @@ class CategoryViewController: UIViewController {
         return stackHorizontalView
     } ()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addViews(views: background, stackVertView)
         addViewInStack(stack: stackVertView, views: stackHorizViewOne, stackHorizViewTwo, stackHorizViewThree)
-        
     }
     
-    override func viewWillLayoutSubviews(){
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         NSLayoutConstraint.activate([
             stackVertView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
@@ -102,26 +103,20 @@ class CategoryViewController: UIViewController {
         
     }
     
-    func addViews(views: UIView...){
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func addViews(views: UIView...) {
         for view in views {
             self.view.addSubview(view)
         }
     }
     
-    func addViewInStack(stack: UIStackView, views: UIView...){
+    func addViewInStack(stack: UIStackView, views: UIView...) {
         for view in views {
             stack.addArrangedSubview(view)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

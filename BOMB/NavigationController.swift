@@ -17,7 +17,7 @@ class NavigationController: UINavigationController {
     private func loadNavigationControllerAppearance() {
         let standartAppearance = UINavigationBarAppearance()
         standartAppearance.configureWithOpaqueBackground()
-        standartAppearance.backgroundColor = UIColor(named: "purple")
+        standartAppearance.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         standartAppearance.setBackIndicatorImage(UIImage(systemName: "backward.end.fill"),
                                                  transitionMaskImage: UIImage(systemName: "backward.end.fill"))
         standartAppearance.titleTextAttributes = [.font: UIFont(name: "Georgia-Bold", size: 18)!,

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8929FE222A86A23900F1B8CA /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE1F2A86A23900F1B8CA /* UIColor.swift */; };
+		8929FE232A86A23900F1B8CA /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE202A86A23900F1B8CA /* UIButton.swift */; };
+		8929FE242A86A23900F1B8CA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE212A86A23900F1B8CA /* UIImage.swift */; };
+		8929FE272A86A23F00F1B8CA /* Acsiomasupershockc.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8929FE262A86A23F00F1B8CA /* Acsiomasupershockc.otf */; };
+		8929FE2A2A86A25900F1B8CA /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE282A86A25900F1B8CA /* CategoryViewController.swift */; };
+		8929FE2B2A86A25900F1B8CA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE292A86A25900F1B8CA /* MainViewController.swift */; };
 		892C2E142A8255A50005D32C /* QuestionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892C2E132A8255A50005D32C /* QuestionCategory.swift */; };
 		892F10192A84FE130019DFF6 /* CheckCategoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892F10182A84FE130019DFF6 /* CheckCategoryProtocol.swift */; };
 		892F101B2A85007D0019DFF6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892F101A2A85007D0019DFF6 /* NavigationController.swift */; };
@@ -22,6 +28,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8929FE1F2A86A23900F1B8CA /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		8929FE202A86A23900F1B8CA /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		8929FE212A86A23900F1B8CA /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		8929FE262A86A23F00F1B8CA /* Acsiomasupershockc.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Acsiomasupershockc.otf; sourceTree = "<group>"; };
+		8929FE282A86A25900F1B8CA /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		8929FE292A86A25900F1B8CA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		892C2E132A8255A50005D32C /* QuestionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCategory.swift; sourceTree = "<group>"; };
 		892F10182A84FE130019DFF6 /* CheckCategoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCategoryProtocol.swift; sourceTree = "<group>"; };
 		892F101A2A85007D0019DFF6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -49,9 +61,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8929FE1E2A86A23900F1B8CA /* Extentional */ = {
+			isa = PBXGroup;
+			children = (
+				8929FE1F2A86A23900F1B8CA /* UIColor.swift */,
+				8929FE202A86A23900F1B8CA /* UIButton.swift */,
+				8929FE212A86A23900F1B8CA /* UIImage.swift */,
+			);
+			path = Extentional;
+			sourceTree = "<group>";
+		};
+		8929FE252A86A23F00F1B8CA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8929FE262A86A23F00F1B8CA /* Acsiomasupershockc.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		89F1AB5A2A80FEA200B6A6DA = {
 			isa = PBXGroup;
 			children = (
+				8929FE252A86A23F00F1B8CA /* Fonts */,
+				8929FE1E2A86A23900F1B8CA /* Extentional */,
 				89F1AB652A80FEA200B6A6DA /* BOMB */,
 				89F1AB642A80FEA200B6A6DA /* Products */,
 			);
@@ -68,8 +100,8 @@
 		89F1AB652A80FEA200B6A6DA /* BOMB */ = {
 			isa = PBXGroup;
 			children = (
-				89F1AB662A80FEA200B6A6DA /* AppDelegate.swift */,
-				89F1AB682A80FEA200B6A6DA /* SceneDelegate.swift */,
+				8929FE292A86A25900F1B8CA /* MainViewController.swift */,
+				8929FE282A86A25900F1B8CA /* CategoryViewController.swift */,
 				892C2E132A8255A50005D32C /* QuestionCategory.swift */,
 				8953A25F2A8260B0009D2226 /* Model.swift */,
 				892F101A2A85007D0019DFF6 /* NavigationController.swift */,
@@ -81,6 +113,8 @@
 				89F1AB6F2A80FEA200B6A6DA /* Assets.xcassets */,
 				89F1AB712A80FEA200B6A6DA /* LaunchScreen.storyboard */,
 				89F1AB742A80FEA200B6A6DA /* Info.plist */,
+				89F1AB662A80FEA200B6A6DA /* AppDelegate.swift */,
+				89F1AB682A80FEA200B6A6DA /* SceneDelegate.swift */,
 			);
 			path = BOMB;
 			sourceTree = "<group>";
@@ -144,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89F1AB732A80FEA200B6A6DA /* LaunchScreen.storyboard in Resources */,
+				8929FE272A86A23F00F1B8CA /* Acsiomasupershockc.otf in Resources */,
 				892F101D2A8503B10019DFF6 /* video.mp4 in Resources */,
 				892F101F2A852FAD0019DFF6 /* tikane-taymera-bombyi.mp3 in Resources */,
 				89F1AB702A80FEA200B6A6DA /* Assets.xcassets in Resources */,
@@ -158,9 +193,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				89DA03962A83B95A001460FC /* GameViewController.swift in Sources */,
+				8929FE2B2A86A25900F1B8CA /* MainViewController.swift in Sources */,
+				8929FE242A86A23900F1B8CA /* UIImage.swift in Sources */,
 				892C2E142A8255A50005D32C /* QuestionCategory.swift in Sources */,
 				89F1AB6B2A80FEA200B6A6DA /* ViewController.swift in Sources */,
+				8929FE2A2A86A25900F1B8CA /* CategoryViewController.swift in Sources */,
 				892F10192A84FE130019DFF6 /* CheckCategoryProtocol.swift in Sources */,
+				8929FE222A86A23900F1B8CA /* UIColor.swift in Sources */,
+				8929FE232A86A23900F1B8CA /* UIButton.swift in Sources */,
 				8953A2602A8260B0009D2226 /* Model.swift in Sources */,
 				89F1AB672A80FEA200B6A6DA /* AppDelegate.swift in Sources */,
 				892F101B2A85007D0019DFF6 /* NavigationController.swift in Sources */,

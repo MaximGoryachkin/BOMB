@@ -13,6 +13,8 @@ class MainViewController: UIViewController {
     let widthBtn: CGFloat = 200
     let btnsHeightText: CGFloat = 25
     
+    var model = QuestionModel()
+    
     //add settings button
     lazy var settingsBtn: AnimationButtons = {
         let newSettingsButton = AnimationButtons()
@@ -171,6 +173,15 @@ class MainViewController: UIViewController {
         return stackVerticalIV
     } ()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addViews(views: background, stackVertView, stackHorizView, settingsBtn, helpBtn)
+        addViewInStack(stack: stackVertView, views: logo, gameBtn, continueBtn,categoriesBtn, stackHorizView)
+        addViewInStack(stack: stackHorizView, views: settingsBtn, helpBtn)
+        logo.addSubview(stackVertImageView)
+        addViewInStack(stack: stackVertImageView, views: boombLable, boombLableSecond)
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         //stackVertView constraint (super stack)
@@ -214,22 +225,17 @@ class MainViewController: UIViewController {
         ])
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addViews(views: background, stackVertView, stackHorizView, settingsBtn, helpBtn)
-        addViewInStack(stack: stackVertView, views: logo, gameBtn, continueBtn,categoriesBtn, stackHorizView)
-        addViewInStack(stack: stackHorizView, views: settingsBtn, helpBtn)
-        logo.addSubview(stackVertImageView)
-        addViewInStack(stack: stackVertImageView, views: boombLable, boombLableSecond)
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    func addViews(views: UIView...){
+    func addViews(views: UIView...) {
         for view in views {
             self.view.addSubview(view)
         }
     }
     
-    func addViewInStack(stack: UIStackView, views: UIView...){
+    func addViewInStack(stack: UIStackView, views: UIView...) {
         for view in views {
             stack.addArrangedSubview(view)
         }
@@ -244,7 +250,9 @@ class MainViewController: UIViewController {
     }
     
     @objc func categoriesGameBtn(){
-        print("categoriesGame")
+        let categoryVC = CategoryViewController()
+        categoryVC.delegate = self
+        navigationController?.pushViewController(categoryVC, animated: true)
     }
     
     @objc func settingsGameBtn(){
@@ -255,4 +263,10 @@ class MainViewController: UIViewController {
         print("Help")
     }
     
+}
+
+extension MainViewController: CheckCategoryProtocol {
+    func updateModel(for name: String) {
+        model.update(categoryName: name)
+    }
 }

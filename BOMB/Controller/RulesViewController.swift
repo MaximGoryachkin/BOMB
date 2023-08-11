@@ -9,6 +9,41 @@ import UIKit
 
 class RulesViewController: UIViewController {
     
+    enum Constants {
+        enum Fonts {
+            static let title = UIFont.boldSystemFont(ofSize: 40)
+            static let categoriesLabel = UIFont.systemFont(ofSize: 16)
+            static let categoriesEmoji = UIFont.systemFont(ofSize: 60)
+            static let helpText = UIFont.boldSystemFont(ofSize: 22)
+        }
+        
+        enum CornerRadius {
+            static let categoryContainer: CGFloat = 50
+        }
+        
+        enum Colors {
+            static let title = UIColor(named: "purple")
+            static let categoryContainer = UIColor(named: "purple")
+            static let scrollViewBackground = UIColor.white
+            static let categoriesLabel = UIColor.white
+            static let navBarBackground = UIColor.white
+            static let navBarTint = UIColor.white
+        }
+        
+        enum Insets {
+            static let numberHeight: CGFloat = 70
+            static let numberWidth: CGFloat = 70
+            static let rulesText = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: -16)
+            static let title = UIEdgeInsets(top: 20, left: 0, bottom: -8, right: 0)
+            static let categoriesSizeMultipier: CGFloat = 0.39
+            static let categoriesContainerLeft = UIEdgeInsets(top: 8, left: 40, bottom: 0, right: 0)
+            static let categoriesContainerRight = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: -40)
+            static let timeImage = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+            static let timeDescriptionLabel = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+            static let categoriesDescriptionLabel = UIEdgeInsets(top: 12, left: 4, bottom: -12, right: -4)
+        }
+    }
+    
     let scrollView = UIScrollView()
     let contentView = UIView()
     let model = RulesModel()
@@ -16,11 +51,9 @@ class RulesViewController: UIViewController {
     func configureNavBar() {
         navigationItem.title = "Помощь"
         navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.purple]
-        navigationController?.navigationBar.backgroundColor = .white
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.backgroundColor = Constants.Colors.navBarBackground
+        navigationController?.navigationBar.barTintColor = Constants.Colors.navBarTint
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.backBarButtonItem?.tintColor = .black
     }
     
     override func viewDidLoad() {
@@ -29,7 +62,7 @@ class RulesViewController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = Constants.Colors.scrollViewBackground
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -88,14 +121,14 @@ class RulesViewController: UIViewController {
         container.translatesAutoresizingMaskIntoConstraints = false
         
         let categoryContainerLeft = UIView(frame: .zero)
-        categoryContainerLeft.backgroundColor = UIColor(named: "purple") ?? UIColor()
+        categoryContainerLeft.backgroundColor = Constants.Colors.categoryContainer ?? UIColor()
         categoryContainerLeft.translatesAutoresizingMaskIntoConstraints = false
-        categoryContainerLeft.layer.cornerRadius = 50
+        categoryContainerLeft.layer.cornerRadius = Constants.CornerRadius.categoryContainer
         
         let categoryContainerRight = UIView(frame: .zero)
-        categoryContainerRight.backgroundColor = UIColor(named: "purple") ?? UIColor()
+        categoryContainerRight.backgroundColor = Constants.Colors.categoryContainer ?? UIColor()
         categoryContainerRight.translatesAutoresizingMaskIntoConstraints = false
-        categoryContainerRight.layer.cornerRadius = 50
+        categoryContainerRight.layer.cornerRadius = Constants.CornerRadius.categoryContainer
         
         switch viewModel {
         case let .imageAndText(image, text):
@@ -103,7 +136,7 @@ class RulesViewController: UIViewController {
             label.text = text
             label.numberOfLines = 0
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = .boldSystemFont(ofSize: 22)
+            label.font = Constants.Fonts.helpText
             label.textAlignment = .center
             
             let imageView = UIImageView(frame: .zero)
@@ -116,12 +149,12 @@ class RulesViewController: UIViewController {
             NSLayoutConstraint.activate([
                 imageView.topAnchor.constraint(equalTo: container.topAnchor),
                 imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-                imageView.heightAnchor.constraint(equalToConstant: 70),
-                imageView.widthAnchor.constraint(equalToConstant: 70),
-                label.topAnchor.constraint(equalTo: container.topAnchor, constant: 4),
-                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -4),
+                imageView.heightAnchor.constraint(equalToConstant: Constants.Insets.numberHeight),
+                imageView.widthAnchor.constraint(equalToConstant: Constants.Insets.numberHeight),
+                label.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.Insets.rulesText.top),
+                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: Constants.Insets.rulesText.bottom),
                 label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor),
-                label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+                label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: Constants.Insets.rulesText.right),
             ])
             
             guard let image else { break }
@@ -131,15 +164,15 @@ class RulesViewController: UIViewController {
             let label = UILabel(frame: .zero)
             label.text = text
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = .boldSystemFont(ofSize: 40)
+            label.font = Constants.Fonts.title
             label.textAlignment = .center
             label.numberOfLines = 0
-            label.textColor = UIColor(named: "purple")
+            label.textColor = Constants.Colors.title
             container.addSubview(label)
             
             NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: container.topAnchor, constant: 20),
-                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -8),
+                label.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.Insets.title.top),
+                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: Constants.Insets.title.bottom),
                 label.leadingAnchor.constraint(equalTo: container.leadingAnchor),
                 label.trailingAnchor.constraint(equalTo: container.trailingAnchor),
             ])
@@ -162,10 +195,10 @@ class RulesViewController: UIViewController {
             let titleRight = UILabel(frame: .zero)
             titleLeft.text = left?.0
             titleRight.text = right?.0
-            titleLeft.textColor = .white
-            titleRight.textColor = .white
-            titleLeft.font = .systemFont(ofSize: 16)
-            titleRight.font = .systemFont(ofSize: 16)
+            titleLeft.textColor = Constants.Colors.categoriesLabel
+            titleRight.textColor = Constants.Colors.categoriesLabel
+            titleLeft.font = Constants.Fonts.categoriesLabel
+            titleRight.font = Constants.Fonts.categoriesLabel
             titleLeft.textAlignment = .center
             titleRight.textAlignment = .center
             titleLeft.numberOfLines = 0
@@ -177,8 +210,8 @@ class RulesViewController: UIViewController {
             let emojiRight = UILabel(frame: .zero)
             emojiLeft.text = left?.1
             emojiRight.text = right?.1
-            emojiLeft.font = .boldSystemFont(ofSize: 60)
-            emojiRight.font = .boldSystemFont(ofSize: 60)
+            emojiLeft.font = Constants.Fonts.categoriesEmoji
+            emojiRight.font = Constants.Fonts.categoriesEmoji
             emojiLeft.translatesAutoresizingMaskIntoConstraints = false
             emojiRight.translatesAutoresizingMaskIntoConstraints = false
             
@@ -191,10 +224,10 @@ class RulesViewController: UIViewController {
             
             NSLayoutConstraint.activate([
                 categoryContainerLeft.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-                categoryContainerLeft.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.39),
-                categoryContainerLeft.heightAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.39),
-                categoryContainerLeft.topAnchor.constraint(equalTo: container.topAnchor, constant: 8),
-                categoryContainerLeft.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 40),
+                categoryContainerLeft.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: Constants.Insets.categoriesSizeMultipier),
+                categoryContainerLeft.heightAnchor.constraint(equalTo: container.widthAnchor, multiplier: Constants.Insets.categoriesSizeMultipier),
+                categoryContainerLeft.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.Insets.categoriesContainerLeft.top),
+                categoryContainerLeft.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: Constants.Insets.categoriesContainerLeft.left),
                 
                 emojiLeft.centerXAnchor.constraint(equalTo: categoryContainerLeft.centerXAnchor),
                 emojiLeft.centerYAnchor.constraint(equalTo: categoryContainerLeft.centerYAnchor),
@@ -203,10 +236,10 @@ class RulesViewController: UIViewController {
                 titleLeft.topAnchor.constraint(equalTo: emojiLeft.bottomAnchor),
                 
                 categoryContainerRight.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-                categoryContainerRight.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.39),
-                categoryContainerRight.heightAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.39),
-                categoryContainerRight.topAnchor.constraint(equalTo: container.topAnchor, constant: 8),
-                categoryContainerRight.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -40),
+                categoryContainerRight.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: Constants.Insets.categoriesSizeMultipier),
+                categoryContainerRight.heightAnchor.constraint(equalTo: container.widthAnchor, multiplier: Constants.Insets.categoriesSizeMultipier),
+                categoryContainerRight.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.Insets.categoriesContainerRight.top),
+                categoryContainerRight.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: Constants.Insets.categoriesContainerRight.right),
                 
                 emojiRight.centerXAnchor.constraint(equalTo: categoryContainerRight.centerXAnchor),
                 emojiRight.centerYAnchor.constraint(equalTo: categoryContainerRight.centerYAnchor),
@@ -228,7 +261,7 @@ class RulesViewController: UIViewController {
             descriptionLabel.text = text
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             descriptionLabel.numberOfLines = 0
-            descriptionLabel.font = .boldSystemFont(ofSize: 22)
+            descriptionLabel.font = Constants.Fonts.helpText
             descriptionLabel.textAlignment = .center
             descriptionLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             
@@ -237,29 +270,28 @@ class RulesViewController: UIViewController {
             
             NSLayoutConstraint.activate([
                 durationImage.topAnchor.constraint(equalTo: container.topAnchor),
-                durationImage.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 8),
+                durationImage.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: Constants.Insets.timeImage.left),
                 durationImage.bottomAnchor.constraint(equalTo: container.bottomAnchor),
                 
                 descriptionLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor),
-                descriptionLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -8),
-                descriptionLabel.leadingAnchor.constraint(equalTo: durationImage.trailingAnchor, constant: 8)
+                descriptionLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: Constants.Insets.timeDescriptionLabel.right),
+                descriptionLabel.leadingAnchor.constraint(equalTo: durationImage.trailingAnchor, constant: Constants.Insets.timeDescriptionLabel.left)
             ])
             
         case .text(let text):
             let label = UILabel(frame: .zero)
             label.text = text
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = .boldSystemFont(ofSize: 22)
+            label.font = Constants.Fonts.helpText
             label.textAlignment = .center
             label.numberOfLines = 0
-            label.textColor = .black
             container.addSubview(label)
             
             NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: container.topAnchor, constant: 12),
-                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -12),
-                label.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 4),
-                label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -4),
+                label.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.Insets.categoriesDescriptionLabel.top),
+                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: Constants.Insets.categoriesDescriptionLabel.bottom),
+                label.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: Constants.Insets.categoriesDescriptionLabel.left),
+                label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: Constants.Insets.categoriesDescriptionLabel.right),
             ])
         }
         

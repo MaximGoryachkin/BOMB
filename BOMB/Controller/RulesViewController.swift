@@ -20,9 +20,7 @@ class RulesViewController: UIViewController {
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = false
-        
         navigationItem.backBarButtonItem?.tintColor = .black
-        
     }
     
     override func viewDidLoad() {
@@ -32,7 +30,6 @@ class RulesViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .white
-        scrollView.isPagingEnabled = true
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -72,18 +69,16 @@ class RulesViewController: UIViewController {
             scrollView.addSubview(containerView)
             
             NSLayoutConstraint.activate([
-                containerView.leadingAnchor.constraint(equalTo: lastContainerView?.trailingAnchor ?? scrollView.contentLayoutGuide.leadingAnchor),
-                containerView.topAnchor.constraint(equalTo: scrollView.frameLayoutGuide.topAnchor),
+                containerView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor),
+                containerView.topAnchor.constraint(equalTo: lastContainerView?.bottomAnchor ?? scrollView.contentLayoutGuide.topAnchor),
                 containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
-                containerView.bottomAnchor.constraint(greaterThanOrEqualTo: scrollView.contentLayoutGuide.bottomAnchor)
-//                scrollView.contentLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualTo: )
             ])
             
             lastContainerView = containerView
             lastView = nil
             
             if index == pages.endIndex - 1 {
-                containerView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
+                containerView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
             }
         }
     }
@@ -130,7 +125,6 @@ class RulesViewController: UIViewController {
             ])
             
             guard let image else { break }
-            
             imageView.image = image
             
         case .title(let text):
@@ -144,7 +138,7 @@ class RulesViewController: UIViewController {
             container.addSubview(label)
             
             NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: container.topAnchor),
+                label.topAnchor.constraint(equalTo: container.topAnchor, constant: 20),
                 label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -8),
                 label.leadingAnchor.constraint(equalTo: container.leadingAnchor),
                 label.trailingAnchor.constraint(equalTo: container.trailingAnchor),

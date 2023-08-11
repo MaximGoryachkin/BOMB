@@ -30,9 +30,9 @@ class ViewController: UIViewController {
     }
     
     @objc func categoryButtonPressed() {
-        let categoryVC = CategoryViewController()
-        categoryVC.delegate = self
-        present(categoryVC, animated: true)
+//        let categoryVC = CategoryViewController()
+//        categoryVC.delegate = self
+//        present(categoryVC, animated: true)
     }
     
     @objc func gameButtonPressed() {

@@ -14,8 +14,8 @@
 		89F1AB702A80FEA200B6A6DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89F1AB6F2A80FEA200B6A6DA /* Assets.xcassets */; };
 		89F1AB732A80FEA200B6A6DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F1AB712A80FEA200B6A6DA /* LaunchScreen.storyboard */; };
 		9358E0BC2A8410520085C68D /* GameEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9358E0BB2A8410520085C68D /* GameEndViewController.swift */; };
-		9358E0BE2A84ABEF0085C68D /* vzryiv-bombyi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9358E0BD2A84ABEE0085C68D /* vzryiv-bombyi.mp3 */; };
-		9358E0C02A84AC0B0085C68D /* taimer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9358E0BF2A84AC0A0085C68D /* taimer.mp3 */; };
+		9358E0CC2A86A07E0085C68D /* timer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9358E0CB2A86A07E0085C68D /* timer.mp3 */; };
+		9358E0CE2A86A0850085C68D /* vzryv.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9358E0CD2A86A0850085C68D /* vzryv.mp3 */; };
 		93EB3AB42A82918800E3ADAB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB3AB32A82918800E3ADAB /* GameViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,8 +29,8 @@
 		89F1AB722A80FEA200B6A6DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89F1AB742A80FEA200B6A6DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9358E0BB2A8410520085C68D /* GameEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndViewController.swift; sourceTree = "<group>"; };
-		9358E0BD2A84ABEE0085C68D /* vzryiv-bombyi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "vzryiv-bombyi.mp3"; path = "../../Downloads/vzryiv-bombyi.mp3"; sourceTree = "<group>"; };
-		9358E0BF2A84AC0A0085C68D /* taimer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = taimer.mp3; path = ../../Downloads/taimer.mp3; sourceTree = "<group>"; };
+		9358E0CB2A86A07E0085C68D /* timer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = timer.mp3; path = ../../../Downloads/timer.mp3; sourceTree = "<group>"; };
+		9358E0CD2A86A0850085C68D /* vzryv.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = vzryv.mp3; path = ../../../Downloads/vzryv.mp3; sourceTree = "<group>"; };
 		93EB3AB32A82918800E3ADAB /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,8 +49,6 @@
 			isa = PBXGroup;
 			children = (
 				89F1AB652A80FEA200B6A6DA /* BOMB */,
-				9358E0BD2A84ABEE0085C68D /* vzryiv-bombyi.mp3 */,
-				9358E0BF2A84AC0A0085C68D /* taimer.mp3 */,
 				89F1AB642A80FEA200B6A6DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,6 +73,8 @@
 				89F1AB6F2A80FEA200B6A6DA /* Assets.xcassets */,
 				89F1AB712A80FEA200B6A6DA /* LaunchScreen.storyboard */,
 				89F1AB742A80FEA200B6A6DA /* Info.plist */,
+				9358E0CB2A86A07E0085C68D /* timer.mp3 */,
+				9358E0CD2A86A0850085C68D /* vzryv.mp3 */,
 			);
 			path = BOMB;
 			sourceTree = "<group>";
@@ -137,11 +137,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9358E0BE2A84ABEF0085C68D /* vzryiv-bombyi.mp3 in Resources */,
+				9358E0CC2A86A07E0085C68D /* timer.mp3 in Resources */,
 				89F1AB732A80FEA200B6A6DA /* LaunchScreen.storyboard in Resources */,
 				89F1AB702A80FEA200B6A6DA /* Assets.xcassets in Resources */,
+				9358E0CE2A86A0850085C68D /* vzryv.mp3 in Resources */,
 				89F1AB6E2A80FEA200B6A6DA /* Main.storyboard in Resources */,
-				9358E0C02A84AC0B0085C68D /* taimer.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -113,18 +113,18 @@ class GameViewController: UIViewController {
         } else if counter == 0  {
             timer.invalidate()
             soundOfBoom()
-            present (GameEndViewController(), animated:  true)
+            present(GameEndViewController(), animated:  true)
         }
     }
     
     private func soundOfTimer() {
-        let url = Bundle.main.url(forResource: "taimer", withExtension: "mp3")
+        let url = Bundle.main.url(forResource: "timer", withExtension: "mp3")
         audioPlayer = AVPlayer.init(url: url!)
         audioPlayer.play()
     }
     
     private func soundOfBoom() {
-        let url = Bundle.main.url(forResource: "vzryiv-bombyi", withExtension: "mp3")
+        let url = Bundle.main.url(forResource: "vzryv", withExtension: "mp3")
         audioPlayer = AVPlayer.init(url: url!)
         audioPlayer.play()
     }

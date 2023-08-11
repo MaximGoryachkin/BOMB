@@ -7,67 +7,91 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     let diameterBtn: CGFloat = 60
     let heightBtn: CGFloat = 50
     let widthBtn: CGFloat = 200
+    let btnsHeightText: CGFloat = 25
     
     //add settings button
-    lazy var settingsBtn: UIButton = {
-        let newSettingsButton = UIButton()
-        newSettingsButton.backgroundColor = UIColor.red
+    lazy var settingsBtn: AnimationButtons = {
+        let newSettingsButton = AnimationButtons()
+        newSettingsButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         newSettingsButton.frame.size.width = diameterBtn
         newSettingsButton.frame.size.height = diameterBtn
         newSettingsButton.layer.cornerRadius = newSettingsButton.frame.width/2
-        newSettingsButton.setTitle("1", for: .normal)
+        newSettingsButton.layer.borderWidth = 3.0
+        newSettingsButton.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
+        let logoSettingsImage = UIImage(named: "settings")
+        newSettingsButton.setImage(logoSettingsImage, for: .normal)
+        //newSettingsButton.setTitle("1", for: .normal)
         newSettingsButton.addTarget(self, action: #selector(settingsGameBtn), for: .touchUpInside)
         return newSettingsButton
     }()
     
     //add help button
-    lazy var helpBtn: UIButton = {
-        let newHelpButton = UIButton()
-        newHelpButton.backgroundColor = UIColor.green
+    lazy var helpBtn: AnimationButtons = {
+        let newHelpButton = AnimationButtons()
+        newHelpButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         newHelpButton.frame.size.width = diameterBtn
         newHelpButton.frame.size.height = diameterBtn
         newHelpButton.layer.cornerRadius = newHelpButton.frame.width/2
-        newHelpButton.setTitle("2", for: .normal)
+        newHelpButton.layer.borderWidth = 3.0
+        newHelpButton.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
+        let logoQestImage = UIImage(named: "qest")
+        newHelpButton.setImage(logoQestImage, for: .normal)
+        //newHelpButton.setTitle("2", for: .normal)
         newHelpButton.addTarget(self, action: #selector(helpGameBtn), for: .touchUpInside)
         return newHelpButton
     }()
     
     //add new game button
-    lazy var gameBtn: UIButton = {
-        let newGameButton = UIButton()
-        newGameButton.backgroundColor = UIColor.magenta
+    lazy var gameBtn: AnimationButtons = {
+        let newGameButton = AnimationButtons()
+        newGameButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         newGameButton.frame.size.width = widthBtn
         newGameButton.frame.size.height = heightBtn
         newGameButton.layer.cornerRadius = newGameButton.frame.height/2
+        newGameButton.layer.borderWidth = 3.0
+        newGameButton.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
         newGameButton.setTitle("новая игра", for: .normal)
+        newGameButton.titleLabel?.textAlignment = .center
+        newGameButton.setTitleColor(.yellow, for: .normal)
+        newGameButton.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: btnsHeightText)
         newGameButton.addTarget(self, action: #selector(newGameBtn), for: .touchUpInside)
         return newGameButton
     }()
     
     //add continue game button
-    lazy var continueBtn: UIButton = {
-        let continueGameButton = UIButton()
-        continueGameButton.backgroundColor = UIColor.magenta
+    lazy var continueBtn: AnimationButtons = {
+        let continueGameButton = AnimationButtons()
+        continueGameButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         continueGameButton.frame.size.width = widthBtn
         continueGameButton.frame.size.height = heightBtn
         continueGameButton.layer.cornerRadius = continueGameButton.frame.height/2
+        continueGameButton.layer.borderWidth = 3.0
+        continueGameButton.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
         continueGameButton.setTitle("продолжить", for: .normal)
+        continueGameButton.titleLabel?.textAlignment = .center
+        continueGameButton.setTitleColor(.yellow, for: .normal)
+        continueGameButton.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: btnsHeightText)
         continueGameButton.addTarget(self, action: #selector(continueGameBtn), for: .touchUpInside)
         return continueGameButton
     }()
     
     //add categories game button
-    lazy var categoriesBtn: UIButton = {
-        let categoriesGameButton = UIButton()
-        categoriesGameButton.backgroundColor = UIColor.magenta
+    lazy var categoriesBtn: AnimationButtons = {
+        let categoriesGameButton = AnimationButtons()
+        categoriesGameButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         categoriesGameButton.frame.size.width = widthBtn
         categoriesGameButton.frame.size.height = heightBtn
         categoriesGameButton.layer.cornerRadius = categoriesGameButton.frame.height/2
+        categoriesGameButton.layer.borderWidth = 3.0
+        categoriesGameButton.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
         categoriesGameButton.setTitle("категории", for: .normal)
+        categoriesGameButton.titleLabel?.textAlignment = .center
+        categoriesGameButton.setTitleColor(.yellow, for: .normal)
+        categoriesGameButton.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: btnsHeightText)
         categoriesGameButton.addTarget(self, action: #selector(categoriesGameBtn), for: .touchUpInside)
         return categoriesGameButton
     }()
@@ -88,6 +112,7 @@ class ViewController: UIViewController {
         imageLogoView.frame.size.height = imageLogoView.frame.width
         let logoImage = UIImage(named: "startImage")
         imageLogoView.image = logoImage
+        
         //self.view.addSubview(imageLogoView)
         return imageLogoView
     }()
@@ -98,8 +123,8 @@ class ViewController: UIViewController {
         stackVerticalView.distribution = .equalCentering
         stackVerticalView.alignment = .center
         stackVerticalView.spacing = 10
-        stackVerticalView.backgroundColor = .green
-        //self.view.addSubview(stackVerticalView)
+        stackVerticalView.backgroundColor = .clear //free
+        stackVerticalView.translatesAutoresizingMaskIntoConstraints = false
         return stackVerticalView
     } ()
     
@@ -109,7 +134,8 @@ class ViewController: UIViewController {
         stackHorizontalView.distribution = .equalCentering
         stackHorizontalView.alignment = .center
         stackHorizontalView.spacing = 50
-        stackHorizontalView.backgroundColor = .blue
+        stackHorizontalView.backgroundColor = .clear //free
+        
         //self.view.addSubview(stackHorizontalView)
         return stackHorizontalView
     } ()
@@ -120,6 +146,8 @@ class ViewController: UIViewController {
         boomb.frame.size.height = 30
         boomb.textAlignment = .center
         boomb.text = "БОМБА"
+        let gradient = UIImage.gImage(frame: boomb.bounds, colors: [UIColor(red: 0x2A, green: 0x14, blue: 0x68), UIColor(red: 0xAC, green: 0x49, blue: 0xFF), .white])
+        boomb.textColor = UIColor.init(patternImage: gradient)
         boomb.font = UIFont(name: "AcsiomaSuperShockC", size: 70)
         return boomb
     }()
@@ -127,6 +155,7 @@ class ViewController: UIViewController {
     lazy var boombLableSecond: UILabel = {
         let boombText = UILabel()
         boombText.text = "игра для компании"
+        boombText.textColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         boombText.font = UIFont(name: "AcsiomaSuperShockC", size: 25)
         return boombText
     }()
@@ -137,12 +166,13 @@ class ViewController: UIViewController {
         stackVerticalIV.distribution = .equalCentering
         stackVerticalIV.alignment = .center
         stackVerticalIV.spacing = 10
-        stackVerticalIV.backgroundColor = .red
+        stackVerticalIV.backgroundColor = .clear //free
+        stackVerticalIV.translatesAutoresizingMaskIntoConstraints = false
         return stackVerticalIV
     } ()
     
     override func viewWillLayoutSubviews() {
-        <#code#>
+        super.viewWillLayoutSubviews()
     }
     
     override func viewDidLoad() {
@@ -151,7 +181,6 @@ class ViewController: UIViewController {
         view.addSubview(stackVertView)
         stackVertView.addArrangedSubview(logo)
         logo.addSubview(stackVertImageView)
-        stackVertImageView.translatesAutoresizingMaskIntoConstraints = false
         stackVertImageView.addArrangedSubview(boombLable)
         stackVertImageView.addArrangedSubview(boombLableSecond)
         stackVertView.addArrangedSubview(gameBtn)
@@ -163,9 +192,9 @@ class ViewController: UIViewController {
         view.addSubview(helpBtn)
         stackHorizView.addArrangedSubview(settingsBtn)
         stackHorizView.addArrangedSubview(helpBtn)
-        stackVertView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            stackVertView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            stackVertView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             stackVertView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             stackVertView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             stackVertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
@@ -193,12 +222,6 @@ class ViewController: UIViewController {
             helpBtn.heightAnchor.constraint(equalToConstant: diameterBtn),
             helpBtn.widthAnchor.constraint(equalToConstant: diameterBtn)
         ])
-        for family: String in UIFont.familyNames {
-                    print(family)
-                    for names: String in UIFont.fontNames(forFamilyName: family){
-                        print("==\(names)==")
-                    }
-                }
     }
     
     @objc func newGameBtn(){
@@ -222,4 +245,3 @@ class ViewController: UIViewController {
     }
     
 }
-

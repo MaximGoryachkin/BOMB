@@ -18,7 +18,7 @@ class GameEndViewController: UIViewController {
         button.contentMode = .scaleAspectFit
         button.backgroundColor = .purple
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(reloadGame), for: .touchUpInside)
         return button
     }()
     
@@ -71,6 +71,7 @@ class GameEndViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         view.addSubview(playAgainButton)
         view.addSubview(nextExerciseButton)
         view.addSubview(firstLabel)
@@ -78,6 +79,11 @@ class GameEndViewController: UIViewController {
         view.addSubview(bangImage)
         setupContraints()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     private func setupContraints() {
@@ -105,4 +111,13 @@ class GameEndViewController: UIViewController {
         bangImage.bottomAnchor.constraint(equalTo: exerciseLabel.topAnchor, constant: -30).isActive = true
         
     }
+    
+    @objc func reloadGame() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    deinit {
+        print("bye")
+    }
+    
 }

@@ -13,13 +13,14 @@ class GameViewController: UIViewController {
     
     //MARK: - Variables
     
-    var timer = Timer()
-    var counter = 30
+    var roundTime = 5
+    var timer: Timer!
     var audioPlayer: AVPlayer!
-    
     var videoPlayer: AVPlayer!
     var videoLayer: AVPlayerLayer!
-    var isPause = true
+    var isPause = false
+    var bombAmimationIsEnd = false
+    var animationIsEnd = false
     
     var model: QuestionModel!
     
@@ -80,8 +81,20 @@ class GameViewController: UIViewController {
         setupContraints()
     }
     
-    override func viewDidLayoutSubviews() {
-        setupView(with: "bomb", "mp4", selector: #selector(playerItemDidReachEnd1))
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        prepareVideoPlayer(with: "bomb", "mp4", selector: #selector(beginGame))
+        print("GameVC Did Layout")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        startButton.isHidden = false
+        isPause = false
+        bombAmimationIsEnd = false
+        animationIsEnd = false
+        navigationItem.setRightBarButton(UIBarButtonItem(), animated: false)
     }
     
     //MARK: - Private Methods
@@ -91,9 +104,7 @@ class GameViewController: UIViewController {
         startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         startButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         startButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        
-//        bombView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        bombView.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -180).isActive = true
+
         bombView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         bombView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         bombView.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -100).isActive = true
@@ -106,80 +117,75 @@ class GameViewController: UIViewController {
     }
     
     @objc func pressedButton() {
-//        startButton.alpha = 0
-//        labelText.text = "Назовите вид зимнего спорта"
-//        labelTimer.isHidden = false
-//        
-//        labelTimer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        labelTimer.topAnchor.constraint(equalTo: bombView.bottomAnchor, constant: 20).isActive = true
-//        labelTimer.widthAnchor.constraint(equalToConstant: 50).isActive = true
-//        labelTimer.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-//        timer.invalidate()
-        
-//        timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-        
         videoPlayer.play()
+        startButton.isHidden.toggle()
+        labelText.text = "Назовите вид зимнего спорта"
+
+        let barItem = UIBarButtonItem(image: UIImage(systemName: "pause.circle.fill"),
+                                      style: .plain,
+                                      target: self,
+                                      action: #selector(pauseDidTapped))
+        navigationItem.setRightBarButton(barItem, animated: false)
+        
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(roundTime), target: self, selector: #selector(timerAction), userInfo: nil, repeats: false)
     }
     
     @objc func timerAction() {
-        
-        if counter > 0 {
-            soundOfTimer()
-            labelTimer.text = "\(counter)"
-            counter -= 1
-        } else if counter == 0  {
-            timer.invalidate()
-            soundOfBoom()
-            present (GameEndViewController(), animated:  true)
-        }
+        bombAmimationIsEnd = timer.isValid
     }
     
-    private func soundOfTimer() {
-        let url = Bundle.main.url(forResource: "timer", withExtension: "mp3")
-        audioPlayer = AVPlayer.init(url: url!)
+    private func prepareAudioPlayer(with name: String, _ ext: String) {
+        let url = Bundle.main.url(forResource: name, withExtension: ext)
+        audioPlayer = AVPlayer(url: url!)
         audioPlayer.play()
     }
     
-    private func soundOfBoom() {
-        let url = Bundle.main.url(forResource: "vzryiv-bombyi", withExtension: "mp3")
-        audioPlayer = AVPlayer.init(url: url!)
-        audioPlayer.play()
-    }
-    
-    private func setupView(with name: String, _ ext: String, selector: Selector) {
-        let url = Bundle.main.url(forResource: name, withExtension: ext)!
-
+    private func prepareVideoPlayer(with name: String, _ ext: String, selector: Selector) {
+        guard let url = Bundle.main.url(forResource: name, withExtension: ext) else { return }
         videoPlayer = AVPlayer(url: url)
         videoLayer = AVPlayerLayer(player: videoPlayer)
         videoLayer.frame = bombView.bounds
         videoLayer.videoGravity = AVLayerVideoGravity.resizeAspect
         bombView.layer.addSublayer(videoLayer)
-
+        
+        if bombAmimationIsEnd {
+            videoPlayer.play()
+        }
+        
         NotificationCenter.default.addObserver(self,
                                                selector: selector,
                                                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
                                                object: videoPlayer.currentItem)
     }
     
-    
-    
-    @objc func playerItemDidReachEnd1() {
-        videoPlayer.seek(to: .zero) { _ in
-            self.counter -= 1
-            print(self.counter)
-        }
-        if counter >= 1 {
+    @objc func beginGame() {
+        videoPlayer.seek(to: .zero)
+        if !bombAmimationIsEnd {
             videoPlayer.play()
         } else {
             videoLayer.removeFromSuperlayer()
-            setupView(with: "explosion", "mp4", selector: #selector(playerItemDidReachEnd2))
+            prepareVideoPlayer(with: "explosion", "mp4", selector: #selector(bombExplodes))
         }
     }
     
-    @objc func playerItemDidReachEnd2() {
+    @objc func bombExplodes() {
         videoPlayer.seek(to: .zero) { _ in
             self.videoLayer.removeFromSuperlayer()
+            self.animationIsEnd.toggle()
+            let gameEndVC = GameEndViewController()
+            self.navigationController?.pushViewController(gameEndVC, animated: false)
+        }
+    }
+    
+    @objc func pauseDidTapped() {
+        if !isPause {
+            videoPlayer.pause()
+            isPause.toggle()
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "play.circle.fill")
+        } else {
+            videoPlayer.play()
+            isPause.toggle()
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "pause.circle.fill")
         }
     }
     

@@ -31,6 +31,7 @@ class AnimationButtons: UIButton {
         super.touchesEnded(touches, with: event)
         touchEnd()
     }
+    
 }
 
 

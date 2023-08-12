@@ -55,7 +55,7 @@
 		89F1AB682A80FEA200B6A6DA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		89F1AB6F2A80FEA200B6A6DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89F1AB722A80FEA200B6A6DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89F1AB742A80FEA200B6A6DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89F1AB742A80FEA200B6A6DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,6 @@
 				8929FE2F2A8760AA00F1B8CA /* explosion.mp4 */,
 				892F101C2A8503B10019DFF6 /* bomb.mp4 */,
 				892F101E2A852FAD0019DFF6 /* timer.mp3 */,
-				89F1AB742A80FEA200B6A6DA /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -153,6 +152,7 @@
 		89F1AB652A80FEA200B6A6DA /* BOMB */ = {
 			isa = PBXGroup;
 			children = (
+				89F1AB742A80FEA200B6A6DA /* Info.plist */,
 				8929FE522A87769A00F1B8CA /* Resources */,
 				8929FE512A87764D00F1B8CA /* Application */,
 				8929FE1E2A86A23900F1B8CA /* Extentional */,

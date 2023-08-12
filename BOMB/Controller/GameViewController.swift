@@ -18,7 +18,8 @@ class GameViewController: UIViewController {
     var animationInPause = false
     var animationIsEnd = false
     var timer: Timer!
-    var audioPlayer: AVPlayer!
+    var wickAudioPlayer: AVPlayer!
+    var backAudioPlayer: AVPlayer!
     var videoPlayer: AVPlayer!
     var videoLayer: AVPlayerLayer!
     var model: QuestionModel!
@@ -94,7 +95,8 @@ class GameViewController: UIViewController {
         super.viewWillDisappear(animated)
         if startButton.isHidden {
             videoPlayer.pause()
-            audioPlayer.pause()
+            backAudioPlayer.pause()
+            wickAudioPlayer.pause()
             timer.invalidate()
         }
     }
@@ -120,7 +122,8 @@ class GameViewController: UIViewController {
     
     @objc func pressedButton() {
         prepareVideoPlayer(with: "bomb", "mp4", selector: #selector(beginGame))
-        prepareAudioPlayer(with: "timer", "mp3")
+        prepareAudioPlayer(player: &backAudioPlayer, file: "timer", "mp3")
+        prepareAudioPlayer(player: &wickAudioPlayer, file: "wick", "mp3")
         startButton.isHidden.toggle()
         labelText.text = model.setQuestion()
         
@@ -149,14 +152,15 @@ class GameViewController: UIViewController {
     
     private func bombWillExplose() {
         videoLayer.removeFromSuperlayer()
+        wickAudioPlayer.pause()
         prepareVideoPlayer(with: "explosion", "mp4", selector: #selector(bombExplodes))
-        prepareAudioPlayer(with: "explosion", "mp3")
+        prepareAudioPlayer(player: &backAudioPlayer, file: "explosion", "mp3")
     }
     
-    private func prepareAudioPlayer(with name: String, _ ext: String) {
+    private func prepareAudioPlayer(player: inout AVPlayer?, file name: String, _ ext: String) {
         let url = Bundle.main.url(forResource: name, withExtension: ext)
-        audioPlayer = AVPlayer(url: url!)
-        audioPlayer.play()
+        player = AVPlayer(url: url!)
+        player?.play()
     }
     
     private func prepareVideoPlayer(with name: String, _ ext: String, selector: Selector) {
@@ -194,13 +198,15 @@ class GameViewController: UIViewController {
     @objc func pauseDidTapped() {
         if !animationInPause {
             videoPlayer.pause()
-            audioPlayer.pause()
+            backAudioPlayer.pause()
+            wickAudioPlayer.pause()
             animationInPause.toggle()
             timer.invalidate()
             navigationItem.rightBarButtonItem?.image = UIImage(systemName: "play.circle.fill")
         } else {
             videoPlayer.play()
-            audioPlayer.play()
+            backAudioPlayer.play()
+            wickAudioPlayer.play()
             animationInPause.toggle()
             timer = Timer.scheduledTimer(timeInterval: timeInterval,
                                          target: self,
@@ -213,7 +219,8 @@ class GameViewController: UIViewController {
     
     @objc func goToMainVC() {
         videoPlayer.pause()
-        audioPlayer.pause()
+        backAudioPlayer.pause()
+        wickAudioPlayer.pause()
     }
     
     deinit {

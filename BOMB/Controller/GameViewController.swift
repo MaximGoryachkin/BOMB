@@ -13,15 +13,14 @@ class GameViewController: UIViewController {
     
     //MARK: - Variables
     
-    var roundTime = 5
+    var roundTime = 5.0
+    let timeInterval = 0.1
+    var animationInPause = false
+    var animationIsEnd = false
     var timer: Timer!
     var audioPlayer: AVPlayer!
     var videoPlayer: AVPlayer!
     var videoLayer: AVPlayerLayer!
-    var isPause = false
-    var bombAmimationIsEnd = false
-    var animationIsEnd = false
-    
     var model: QuestionModel!
     
     private lazy var startButton: UIButton = {
@@ -67,7 +66,7 @@ class GameViewController: UIViewController {
     }()
     
     //MARK: - Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -81,30 +80,31 @@ class GameViewController: UIViewController {
         setupContraints()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        prepareVideoPlayer(with: "bomb", "mp4", selector: #selector(beginGame))
-        print("GameVC Did Layout")
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         startButton.isHidden = false
-        isPause = false
-        bombAmimationIsEnd = false
+        animationInPause = false
         animationIsEnd = false
+        roundTime = 5
         navigationItem.setRightBarButton(UIBarButtonItem(), animated: false)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        videoPlayer.pause()
+        audioPlayer.pause()
+        timer.invalidate()
+    }
+    
     //MARK: - Private Methods
-
+    
     private func setupContraints() {
         startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
         startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         startButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         startButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
-
+        
         bombView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         bombView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         bombView.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -100).isActive = true
@@ -117,21 +117,38 @@ class GameViewController: UIViewController {
     }
     
     @objc func pressedButton() {
-        videoPlayer.play()
+        prepareVideoPlayer(with: "bomb", "mp4", selector: #selector(beginGame))
+        prepareAudioPlayer(with: "timer", "mp3")
         startButton.isHidden.toggle()
-        labelText.text = "Назовите вид зимнего спорта"
-
+        labelText.text = model.setQuestion()
+        
         let barItem = UIBarButtonItem(image: UIImage(systemName: "pause.circle.fill"),
                                       style: .plain,
                                       target: self,
                                       action: #selector(pauseDidTapped))
         navigationItem.setRightBarButton(barItem, animated: false)
         
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(roundTime), target: self, selector: #selector(timerAction), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: timeInterval,
+                                     target: self,
+                                     selector: #selector(decrementTimer),
+                                     userInfo: nil,
+                                     repeats: true)
     }
     
-    @objc func timerAction() {
-        bombAmimationIsEnd = timer.isValid
+    @objc func decrementTimer() {
+        print(roundTime)
+        if roundTime > timeInterval {
+            roundTime -= timeInterval
+        } else {
+            timer.invalidate()
+            bombWillExplose()
+        }
+    }
+    
+    private func bombWillExplose() {
+        videoLayer.removeFromSuperlayer()
+        prepareVideoPlayer(with: "explosion", "mp4", selector: #selector(bombExplodes))
+        prepareAudioPlayer(with: "explosion", "mp3")
     }
     
     private func prepareAudioPlayer(with name: String, _ ext: String) {
@@ -147,10 +164,7 @@ class GameViewController: UIViewController {
         videoLayer.frame = bombView.bounds
         videoLayer.videoGravity = AVLayerVideoGravity.resizeAspect
         bombView.layer.addSublayer(videoLayer)
-        
-        if bombAmimationIsEnd {
-            videoPlayer.play()
-        }
+        videoPlayer.play()
         
         NotificationCenter.default.addObserver(self,
                                                selector: selector,
@@ -160,11 +174,8 @@ class GameViewController: UIViewController {
     
     @objc func beginGame() {
         videoPlayer.seek(to: .zero)
-        if !bombAmimationIsEnd {
+        if timer.isValid {
             videoPlayer.play()
-        } else {
-            videoLayer.removeFromSuperlayer()
-            prepareVideoPlayer(with: "explosion", "mp4", selector: #selector(bombExplodes))
         }
     }
     
@@ -178,19 +189,32 @@ class GameViewController: UIViewController {
     }
     
     @objc func pauseDidTapped() {
-        if !isPause {
+        if !animationInPause {
             videoPlayer.pause()
-            isPause.toggle()
+            audioPlayer.pause()
+            animationInPause.toggle()
+            timer.invalidate()
             navigationItem.rightBarButtonItem?.image = UIImage(systemName: "play.circle.fill")
         } else {
             videoPlayer.play()
-            isPause.toggle()
+            audioPlayer.play()
+            animationInPause.toggle()
+            timer = Timer.scheduledTimer(timeInterval: timeInterval,
+                                         target: self,
+                                         selector: #selector(decrementTimer),
+                                         userInfo: nil,
+                                         repeats: true)
             navigationItem.rightBarButtonItem?.image = UIImage(systemName: "pause.circle.fill")
         }
     }
     
+    @objc func goToMainVC() {
+        videoPlayer.pause()
+        audioPlayer.pause()
+    }
+    
     deinit {
-        print("Bye")
+        print("deinit gamevc")
     }
     
 }

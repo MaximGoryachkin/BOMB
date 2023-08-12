@@ -15,9 +15,7 @@ class CategoryViewController: UIViewController {
         let backgroundImageView = UIImageView()
         backgroundImageView.frame.size.width = view.frame.width
         backgroundImageView.frame.size.height = view.frame.height
-        let background = UIImage(named: "background")
-        backgroundImageView.image = background
-        //self.view.addSubview(backgroundImageView)
+        backgroundImageView.image = UIImage(named: "background")
         return backgroundImageView
     }()
     
@@ -27,7 +25,7 @@ class CategoryViewController: UIViewController {
         stackVerticalView.distribution = .equalCentering
         stackVerticalView.alignment = .center
         stackVerticalView.spacing = 10
-        stackVerticalView.backgroundColor = .green//free
+        stackVerticalView.backgroundColor = .green
         stackVerticalView.translatesAutoresizingMaskIntoConstraints = false
         return stackVerticalView
     } ()
@@ -104,6 +102,7 @@ class CategoryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     

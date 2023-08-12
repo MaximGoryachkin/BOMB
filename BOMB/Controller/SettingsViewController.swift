@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController {
         view.backgroundColor = .white
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationItem.title = "Настройки"
+        navigationItem.title = "НАСТРОЙКИ"
         
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false

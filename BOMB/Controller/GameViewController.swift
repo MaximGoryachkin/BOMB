@@ -84,6 +84,7 @@ class GameViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.setRightBarButton(UIBarButtonItem(), animated: false)
+        navigationItem.title = "ИГРА"
         startButton.isHidden = false
         animationInPause = false
         animationIsEnd = false

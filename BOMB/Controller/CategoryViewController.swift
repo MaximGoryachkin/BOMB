@@ -161,6 +161,12 @@ class CategoryViewController: UIViewController {
         addViewInStack(stack: stackHorizViewThree, views: fifthCategoriesBtn, sixthCategoriesBtn)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.title = "КАТЕГОРИИ"
+    }
+    
     override func viewWillLayoutSubviews(){
         super.viewWillLayoutSubviews()
         NSLayoutConstraint.activate([

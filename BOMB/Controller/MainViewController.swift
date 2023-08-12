@@ -228,6 +228,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationItem.backButtonTitle = ""
     }
     
     func addViews(views: UIView...) {
@@ -243,6 +244,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func newGameBtn(){
+        model.addQuestions()
         let gameVC = GameViewController()
         gameVC.model = self.model
         navigationController?.pushViewController(gameVC, animated: true)

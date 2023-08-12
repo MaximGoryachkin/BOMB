@@ -85,6 +85,7 @@ class GameEndViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationItem.title = "ИГРА"
     }
     
     private func setupContraints() {

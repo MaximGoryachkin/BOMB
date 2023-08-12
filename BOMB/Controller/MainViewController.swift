@@ -259,11 +259,13 @@ class MainViewController: UIViewController {
     }
     
     @objc func settingsGameBtn(){
-        print("settingsGame")
+        let settingsVC = SettingsViewController()
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     @objc func helpGameBtn(){
-        print("Help")
+        let rulesVC = RulesViewController()
+        navigationController?.pushViewController(rulesVC, animated: true)
     }
     
 }

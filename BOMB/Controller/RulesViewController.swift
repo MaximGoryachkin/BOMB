@@ -26,8 +26,6 @@ class RulesViewController: UIViewController {
             static let categoryContainer = UIColor(named: "purple")
             static let scrollViewBackground = UIColor.white
             static let categoriesLabel = UIColor.white
-            static let navBarBackground = UIColor.white
-            static let navBarTint = UIColor.white
         }
         
         enum Insets {
@@ -51,9 +49,10 @@ class RulesViewController: UIViewController {
     func configureNavBar() {
         navigationItem.title = "Помощь"
         navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.backgroundColor = Constants.Colors.navBarBackground
-        navigationController?.navigationBar.barTintColor = Constants.Colors.navBarTint
+        
         navigationController?.navigationBar.isTranslucent = false
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidLoad() {

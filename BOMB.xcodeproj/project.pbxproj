@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43CECE942A87811700D9B8E2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECE932A87811700D9B8E2 /* SettingsViewController.swift */; };
+		43CECE962A87813100D9B8E2 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECE952A87813100D9B8E2 /* SettingsModel.swift */; };
+		43CECE982A87823000D9B8E2 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECE972A87823000D9B8E2 /* SettingsCellViewModel.swift */; };
 		8929FE222A86A23900F1B8CA /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE1F2A86A23900F1B8CA /* UIColor.swift */; };
 		8929FE232A86A23900F1B8CA /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE202A86A23900F1B8CA /* UIButton.swift */; };
 		8929FE242A86A23900F1B8CA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE212A86A23900F1B8CA /* UIImage.swift */; };
@@ -33,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43CECE932A87811700D9B8E2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		43CECE952A87813100D9B8E2 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		43CECE972A87823000D9B8E2 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		8929FE1F2A86A23900F1B8CA /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		8929FE202A86A23900F1B8CA /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		8929FE212A86A23900F1B8CA /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -97,6 +103,8 @@
 				892C2E132A8255A50005D32C /* QuestionCategory.swift */,
 				8929FE482A87751D00F1B8CA /* RulesModel.swift */,
 				8929FE492A87751D00F1B8CA /* RulesCellViewModel.swift */,
+				43CECE952A87813100D9B8E2 /* SettingsModel.swift */,
+				43CECE972A87823000D9B8E2 /* SettingsCellViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -110,6 +118,7 @@
 				89DA03952A83B95A001460FC /* GameViewController.swift */,
 				8929FE2C2A86A69900F1B8CA /* GameEndViewController.swift */,
 				8929FE4B2A87751D00F1B8CA /* RulesViewController.swift */,
+				43CECE932A87811700D9B8E2 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -241,18 +250,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43CECE962A87813100D9B8E2 /* SettingsModel.swift in Sources */,
 				89DA03962A83B95A001460FC /* GameViewController.swift in Sources */,
 				8929FE2B2A86A25900F1B8CA /* MainViewController.swift in Sources */,
 				8929FE242A86A23900F1B8CA /* UIImage.swift in Sources */,
 				892C2E142A8255A50005D32C /* QuestionCategory.swift in Sources */,
 				8929FE502A87751D00F1B8CA /* RulesViewController.swift in Sources */,
 				8929FE2A2A86A25900F1B8CA /* CategoryViewController.swift in Sources */,
+				43CECE982A87823000D9B8E2 /* SettingsCellViewModel.swift in Sources */,
 				892F10192A84FE130019DFF6 /* CheckCategoryProtocol.swift in Sources */,
 				8929FE222A86A23900F1B8CA /* UIColor.swift in Sources */,
 				8929FE232A86A23900F1B8CA /* UIButton.swift in Sources */,
 				8953A2602A8260B0009D2226 /* QuestionModel.swift in Sources */,
 				8929FE4F2A87751D00F1B8CA /* RulesCellViewModel.swift in Sources */,
 				8929FE4E2A87751D00F1B8CA /* RulesModel.swift in Sources */,
+				43CECE942A87811700D9B8E2 /* SettingsViewController.swift in Sources */,
 				89F1AB672A80FEA200B6A6DA /* AppDelegate.swift in Sources */,
 				892F101B2A85007D0019DFF6 /* NavigationController.swift in Sources */,
 				8929FE2D2A86A69900F1B8CA /* GameEndViewController.swift in Sources */,

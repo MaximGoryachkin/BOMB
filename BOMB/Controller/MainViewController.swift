@@ -8,43 +8,47 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    let diameterBtn: CGFloat = 60
+    let heightBtn: CGFloat = 50
+    let widthBtn: CGFloat = 200
+    let btnsHeightText: CGFloat = 25
+    
     var model = QuestionModel()
     
-    private let diameterBtn: CGFloat = 60
-    private let heightBtn: CGFloat = 50
-    private let widthBtn: CGFloat = 200
-    private let btnsHeightText: CGFloat = 25
-    
     //add settings button
-    private lazy var settingsBtn: AnimationButtons = {
+    lazy var settingsBtn: AnimationButtons = {
         let newSettingsButton = AnimationButtons()
         newSettingsButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         newSettingsButton.frame.size.width = diameterBtn
         newSettingsButton.frame.size.height = diameterBtn
-        newSettingsButton.layer.cornerRadius = newSettingsButton.frame.width / 2
+        newSettingsButton.layer.cornerRadius = newSettingsButton.frame.width/2
         newSettingsButton.layer.borderWidth = 3.0
         newSettingsButton.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
-        newSettingsButton.setImage(UIImage(named: "settings"), for: .normal)
-        newSettingsButton.addTarget(self, action: #selector(settingsGameButtonPressed), for: .touchUpInside)
+        let logoSettingsImage = UIImage(named: "settings")
+        newSettingsButton.setImage(logoSettingsImage, for: .normal)
+        //newSettingsButton.setTitle("1", for: .normal)
+        newSettingsButton.addTarget(self, action: #selector(settingsGameBtn), for: .touchUpInside)
         return newSettingsButton
     }()
     
     //add help button
-    private lazy var helpBtn: AnimationButtons = {
+    lazy var helpBtn: AnimationButtons = {
         let newHelpButton = AnimationButtons()
         newHelpButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         newHelpButton.frame.size.width = diameterBtn
         newHelpButton.frame.size.height = diameterBtn
-        newHelpButton.layer.cornerRadius = newHelpButton.frame.width / 2
+        newHelpButton.layer.cornerRadius = newHelpButton.frame.width/2
         newHelpButton.layer.borderWidth = 3.0
         newHelpButton.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
-        newHelpButton.setImage(UIImage(named: "qest"), for: .normal)
-        newHelpButton.addTarget(self, action: #selector(helpGameButtonPressed), for: .touchUpInside)
+        let logoQestImage = UIImage(named: "qest")
+        newHelpButton.setImage(logoQestImage, for: .normal)
+        //newHelpButton.setTitle("2", for: .normal)
+        newHelpButton.addTarget(self, action: #selector(helpGameBtn), for: .touchUpInside)
         return newHelpButton
     }()
     
     //add new game button
-    private lazy var gameBtn: AnimationButtons = {
+    lazy var gameBtn: AnimationButtons = {
         let newGameButton = AnimationButtons()
         newGameButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         newGameButton.frame.size.width = widthBtn
@@ -56,12 +60,12 @@ class MainViewController: UIViewController {
         newGameButton.titleLabel?.textAlignment = .center
         newGameButton.setTitleColor(.yellow, for: .normal)
         newGameButton.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: btnsHeightText)
-        newGameButton.addTarget(self, action: #selector(newGameButtonPressed), for: .touchUpInside)
+        newGameButton.addTarget(self, action: #selector(newGameBtn), for: .touchUpInside)
         return newGameButton
     }()
     
     //add continue game button
-    private lazy var continueBtn: AnimationButtons = {
+    lazy var continueBtn: AnimationButtons = {
         let continueGameButton = AnimationButtons()
         continueGameButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         continueGameButton.frame.size.width = widthBtn
@@ -73,12 +77,12 @@ class MainViewController: UIViewController {
         continueGameButton.titleLabel?.textAlignment = .center
         continueGameButton.setTitleColor(.yellow, for: .normal)
         continueGameButton.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: btnsHeightText)
-        continueGameButton.addTarget(self, action: #selector(continueGameButtonPressed), for: .touchUpInside)
+        continueGameButton.addTarget(self, action: #selector(continueGameBtn), for: .touchUpInside)
         return continueGameButton
     }()
     
     //add categories game button
-    private lazy var categoriesBtn: AnimationButtons = {
+    lazy var categoriesBtn: AnimationButtons = {
         let categoriesGameButton = AnimationButtons()
         categoriesGameButton.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         categoriesGameButton.frame.size.width = widthBtn
@@ -90,11 +94,11 @@ class MainViewController: UIViewController {
         categoriesGameButton.titleLabel?.textAlignment = .center
         categoriesGameButton.setTitleColor(.yellow, for: .normal)
         categoriesGameButton.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: btnsHeightText)
-        categoriesGameButton.addTarget(self, action: #selector(categoriesGameButtonPressed), for: .touchUpInside)
+        categoriesGameButton.addTarget(self, action: #selector(categoriesGameBtn), for: .touchUpInside)
         return categoriesGameButton
     }()
     
-    private lazy var background: UIImageView = {
+    lazy var background: UIImageView = {
         let backgroundImageView = UIImageView()
         backgroundImageView.frame.size.width = view.frame.width
         backgroundImageView.frame.size.height = view.frame.height
@@ -104,7 +108,7 @@ class MainViewController: UIViewController {
         return backgroundImageView
     }()
     
-    private lazy var logo: UIImageView = {
+    lazy var logo: UIImageView = {
         let imageLogoView = UIImageView()
         imageLogoView.frame.size.width = 300
         imageLogoView.frame.size.height = imageLogoView.frame.width
@@ -115,7 +119,7 @@ class MainViewController: UIViewController {
         return imageLogoView
     }()
     
-    private lazy var stackVertView: UIStackView = {
+    lazy var stackVertView: UIStackView = {
         let stackVerticalView = UIStackView()
         stackVerticalView.axis = .vertical
         stackVerticalView.distribution = .equalCentering
@@ -126,7 +130,7 @@ class MainViewController: UIViewController {
         return stackVerticalView
     } ()
     
-    private lazy var stackHorizView: UIStackView = {
+    lazy var stackHorizView: UIStackView = {
         let stackHorizontalView = UIStackView()
         stackHorizontalView.axis = .horizontal
         stackHorizontalView.distribution = .equalCentering
@@ -138,7 +142,7 @@ class MainViewController: UIViewController {
         return stackHorizontalView
     } ()
     
-    private lazy var boombLable: UILabel = {
+    lazy var boombLable: UILabel = {
         let boomb = UILabel()
         boomb.frame.size.width = 200
         boomb.frame.size.height = 30
@@ -150,7 +154,7 @@ class MainViewController: UIViewController {
         return boomb
     }()
     
-    private lazy var boombLableSecond: UILabel = {
+    lazy var boombLableSecond: UILabel = {
         let boombText = UILabel()
         boombText.text = "игра для компании"
         boombText.textColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
@@ -158,7 +162,7 @@ class MainViewController: UIViewController {
         return boombText
     }()
     
-    private lazy var stackVertImageView: UIStackView = {
+    lazy var stackVertImageView: UIStackView = {
         let stackVerticalIV = UIStackView()
         stackVerticalIV.axis = .vertical
         stackVerticalIV.distribution = .equalCentering
@@ -171,44 +175,21 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logo.addSubview(stackVertImageView)
         addViews(views: background, stackVertView, stackHorizView, settingsBtn, helpBtn)
         addViewInStack(stack: stackVertView, views: logo, gameBtn, continueBtn,categoriesBtn, stackHorizView)
         addViewInStack(stack: stackHorizView, views: settingsBtn, helpBtn)
+        logo.addSubview(stackVertImageView)
         addViewInStack(stack: stackVertImageView, views: boombLable, boombLableSecond)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setupConstraints()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationItem.backButtonTitle = ""
-        model.addQuestions()
-    }
-    
-    private func addViews(views: UIView...) {
-        for view in views {
-            self.view.addSubview(view)
-        }
-    }
-    
-    private func addViewInStack(stack: UIStackView, views: UIView...) {
-        for view in views {
-            stack.addArrangedSubview(view)
-        }
-    }
-    
-    private func setupConstraints() {
         //stackVertView constraint (super stack)
         NSLayoutConstraint.activate([
             stackVertView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             stackVertView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             stackVertView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            stackVertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            stackVertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
         //stackVertImageView constraint (boombLable, boombLableSecond)
         NSLayoutConstraint.activate([
@@ -244,27 +225,45 @@ class MainViewController: UIViewController {
         ])
     }
     
-    @objc private func newGameButtonPressed() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    func addViews(views: UIView...) {
+        for view in views {
+            self.view.addSubview(view)
+        }
+    }
+    
+    func addViewInStack(stack: UIStackView, views: UIView...) {
+        for view in views {
+            stack.addArrangedSubview(view)
+        }
+    }
+    
+    @objc func newGameBtn(){
         let gameVC = GameViewController()
         gameVC.model = self.model
         navigationController?.pushViewController(gameVC, animated: true)
     }
     
-    @objc private func continueGameButtonPressed() {
+    @objc func continueGameBtn(){
         print("continueGame")
     }
     
-    @objc private func categoriesGameButtonPressed() {
+    @objc func categoriesGameBtn(){
         let categoryVC = CategoryViewController()
         categoryVC.delegate = self
         navigationController?.pushViewController(categoryVC, animated: true)
     }
     
-    @objc private func settingsGameButtonPressed() {
-        print("settingsGame")
+    @objc func settingsGameBtn(){
+        let settingsVC = SettingsViewController()
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
     
-    @objc private func helpGameButtonPressed() {
+    @objc func helpGameBtn(){
         let rulesVC = RulesViewController()
         navigationController?.pushViewController(rulesVC, animated: true)
     }

@@ -38,7 +38,6 @@ class GameViewController: UIViewController {
     
     private lazy var labelText: UILabel = {
         var label = UILabel()
-        label.text = "Нажмите «‎Запустить»‎, чтобы начать игру"
         label.font = .boldSystemFont(ofSize: 35)
         label.contentMode = .scaleAspectFit
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -83,24 +82,27 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(), animated: false)
         startButton.isHidden = false
         animationInPause = false
         animationIsEnd = false
         roundTime = 5
-        navigationItem.setRightBarButton(UIBarButtonItem(), animated: false)
+        labelText.text = "Нажмите «‎Запустить»‎, чтобы начать игру"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        videoPlayer.pause()
-        audioPlayer.pause()
-        timer.invalidate()
+        if startButton.isHidden {
+            videoPlayer.pause()
+            audioPlayer.pause()
+            timer.invalidate()
+        }
     }
     
     //MARK: - Private Methods
     
     private func setupContraints() {
-        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
+        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
         startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         startButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         startButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -108,9 +110,9 @@ class GameViewController: UIViewController {
         bombView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         bombView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         bombView.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -100).isActive = true
-        bombView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        bombView.topAnchor.constraint(equalTo: labelText.bottomAnchor).isActive = true
+        labelText.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-        labelText.bottomAnchor.constraint(equalTo: bombView.topAnchor).isActive = true
         labelText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         labelText.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         labelText.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -184,6 +186,7 @@ class GameViewController: UIViewController {
             self.videoLayer.removeFromSuperlayer()
             self.animationIsEnd.toggle()
             let gameEndVC = GameEndViewController()
+            gameEndVC.model = self.model
             self.navigationController?.pushViewController(gameEndVC, animated: false)
         }
     }

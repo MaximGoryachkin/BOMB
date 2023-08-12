@@ -16,4 +16,6 @@ enum Category: String {
     case multfilm = "Мультфильмы"
     case geography = "География"
     case science = "Наука"
+    case videogame = "Видеоигры"
+    case other = "Разное"
 }

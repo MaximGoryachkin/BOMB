@@ -8,6 +8,8 @@
 import UIKit
 
 class GameEndViewController: UIViewController {
+    
+    var model: QuestionModel!
 
     private lazy var playAgainButton: UIButton = {
         var button = UIButton(type: .system)
@@ -32,7 +34,7 @@ class GameEndViewController: UIViewController {
         button.contentMode = .scaleAspectFit
         button.backgroundColor = .purple
         button.translatesAutoresizingMaskIntoConstraints = false
-        //        button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(setNextPunishment), for: .touchUpInside)
         return button
     }()
     
@@ -51,7 +53,7 @@ class GameEndViewController: UIViewController {
     
     private lazy var exerciseLabel: UILabel = {
         var label = UILabel()
-        label.text = "В следующем раунде после каждого ответа хлопать в ладоши"
+        label.text = model.setPunishment()
         label.textColor = .systemMint
         label.font = .boldSystemFont(ofSize: 35)
         label.contentMode = .scaleAspectFit
@@ -78,7 +80,6 @@ class GameEndViewController: UIViewController {
         view.addSubview(exerciseLabel)
         view.addSubview(bangImage)
         setupContraints()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,6 +115,10 @@ class GameEndViewController: UIViewController {
     
     @objc func reloadGame() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func setNextPunishment() {
+        exerciseLabel.text = model.setPunishment()
     }
     
     deinit {

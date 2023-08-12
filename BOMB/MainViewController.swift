@@ -253,7 +253,7 @@ class MainViewController: UIViewController {
     
     @objc func categoriesGameBtn(){
         let categoryVC = CategoryViewController()
-        categoryVC.delegate = self
+        //categoryVC.delegate = self
         navigationController?.pushViewController(categoryVC, animated: true)
     }
     

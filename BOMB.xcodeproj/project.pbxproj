@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26A5C70E2A87657B00204449 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5C70D2A87657B00204449 /* CustomButton.swift */; };
 		8929FE222A86A23900F1B8CA /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE1F2A86A23900F1B8CA /* UIColor.swift */; };
 		8929FE232A86A23900F1B8CA /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE202A86A23900F1B8CA /* UIButton.swift */; };
 		8929FE242A86A23900F1B8CA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929FE212A86A23900F1B8CA /* UIImage.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26A5C70D2A87657B00204449 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		8929FE1F2A86A23900F1B8CA /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		8929FE202A86A23900F1B8CA /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		8929FE212A86A23900F1B8CA /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		89F1AB652A80FEA200B6A6DA /* BOMB */ = {
 			isa = PBXGroup;
 			children = (
+				26A5C70D2A87657B00204449 /* CustomButton.swift */,
 				8929FE292A86A25900F1B8CA /* MainViewController.swift */,
 				8929FE282A86A25900F1B8CA /* CategoryViewController.swift */,
 				89DA03952A83B95A001460FC /* GameViewController.swift */,
@@ -211,6 +214,7 @@
 				892F101B2A85007D0019DFF6 /* NavigationController.swift in Sources */,
 				8929FE2D2A86A69900F1B8CA /* GameEndViewController.swift in Sources */,
 				89F1AB692A80FEA200B6A6DA /* SceneDelegate.swift in Sources */,
+				26A5C70E2A87657B00204449 /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -242,7 +242,9 @@ class MainViewController: UIViewController {
     }
     
     @objc func newGameBtn(){
-        print("newGame")
+        let gameVC = GameViewController()
+        gameVC.model = self.model
+        navigationController?.pushViewController(gameVC, animated: true)
     }
     
     @objc func continueGameBtn(){

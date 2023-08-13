@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
     
     //MARK: - Variables
     
-    var roundTime = 5.0
+    var roundTime = 30.0
     let timeInterval = 0.1
     var animationInPause = false
     var animationIsEnd = false
@@ -28,8 +28,8 @@ class GameViewController: UIViewController {
         var button = UIButton(type: .system)
         button.setTitle("Запустить", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 25)
-        button.layer.cornerRadius = 40
+        button.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: 25)
+        button.layer.cornerRadius = view.frame.height / 20
         button.contentMode = .scaleAspectFit
         button.backgroundColor = .purple
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -39,23 +39,12 @@ class GameViewController: UIViewController {
     
     private lazy var labelText: UILabel = {
         var label = UILabel()
-        label.font = .boldSystemFont(ofSize: 35)
+        label.font = .boldSystemFont(ofSize: 30)
         label.contentMode = .scaleAspectFit
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .purple
         label.numberOfLines = 0
         label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var labelTimer: UILabel = {
-        var label = UILabel()
-        label.isHidden = true
-        label.textAlignment = .center
-        label.textColor = .white
-        label.layer.cornerRadius = 10
-        label.backgroundColor = .red
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -73,7 +62,6 @@ class GameViewController: UIViewController {
         view.addSubview(startButton)
         view.addSubview(bombView)
         view.addSubview(labelText)
-        view.addSubview(labelTimer)
     }
     
     override func viewWillLayoutSubviews() {
@@ -88,7 +76,7 @@ class GameViewController: UIViewController {
         startButton.isHidden = false
         animationInPause = false
         animationIsEnd = false
-        roundTime = 5
+        roundTime = 30
         labelText.text = "Нажмите «‎Запустить»‎, чтобы начать игру"
     }
     
@@ -105,26 +93,27 @@ class GameViewController: UIViewController {
     //MARK: - Private Methods
     
     private func setupContraints() {
-        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        startButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        startButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        startButton.heightAnchor.constraint(equalToConstant: view.frame.height / 10).isActive = true
+        startButton.widthAnchor.constraint(equalToConstant: view.frame.width - 120).isActive = true
         
-        bombView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        bombView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         bombView.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -100).isActive = true
+        bombView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         bombView.topAnchor.constraint(equalTo: labelText.bottomAnchor).isActive = true
-        labelText.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        bombView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
+        labelText.heightAnchor.constraint(equalToConstant: view.frame.height / 4).isActive = true
+        labelText.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         labelText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        labelText.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        labelText.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        labelText.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
     }
     
     @objc func pressedButton() {
         prepareVideoPlayer(with: "bomb", "mp4", selector: #selector(beginGame))
-        prepareAudioPlayer(player: &backAudioPlayer, file: "timer", "mp3")
-        prepareAudioPlayer(player: &wickAudioPlayer, file: "wick", "mp3")
+        prepareAudioPlayer(player: &backAudioPlayer, file: "timer", "mp3", selector: #selector(backPlayTimer))
+        prepareAudioPlayer(player: &wickAudioPlayer, file: "wick", "mp3", selector: #selector(winkPlayTimer))
+        wickAudioPlayer.volume = 0.2
         startButton.isHidden.toggle()
         labelText.text = model.setQuestion()
         
@@ -155,13 +144,18 @@ class GameViewController: UIViewController {
         videoLayer.removeFromSuperlayer()
         wickAudioPlayer.pause()
         prepareVideoPlayer(with: "explosion", "mp4", selector: #selector(bombExplodes))
-        prepareAudioPlayer(player: &backAudioPlayer, file: "explosion", "mp3")
+        prepareAudioPlayer(player: &backAudioPlayer, file: "explosion", "mp3", selector: #selector(backPlayTimer))
     }
     
-    private func prepareAudioPlayer(player: inout AVPlayer?, file name: String, _ ext: String) {
+    private func prepareAudioPlayer(player: inout AVPlayer!, file name: String, _ ext: String, selector: Selector) {
         let url = Bundle.main.url(forResource: name, withExtension: ext)
         player = AVPlayer(url: url!)
-        player?.play()
+        player.play()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: selector,
+                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                                               object: player.currentItem)
     }
     
     private func prepareVideoPlayer(with name: String, _ ext: String, selector: Selector) {
@@ -193,6 +187,20 @@ class GameViewController: UIViewController {
             let gameEndVC = GameEndViewController()
             gameEndVC.model = self.model
             self.navigationController?.pushViewController(gameEndVC, animated: false)
+        }
+    }
+    
+    @objc func backPlayTimer() {
+        backAudioPlayer.seek(to: .zero)
+        if timer.isValid {
+            backAudioPlayer.play()
+        }
+    }
+    
+    @objc func winkPlayTimer() {
+        wickAudioPlayer.seek(to: .zero)
+        if timer.isValid {
+            wickAudioPlayer.play()
         }
     }
     

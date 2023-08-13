@@ -15,8 +15,8 @@ class GameEndViewController: UIViewController {
         var button = UIButton(type: .system)
         button.setTitle("Начать заново", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 25)
-        button.layer.cornerRadius = 40
+        button.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: 25)
+        button.layer.cornerRadius = view.frame.height / 20
         button.contentMode = .scaleAspectFit
         button.backgroundColor = .purple
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -28,9 +28,8 @@ class GameEndViewController: UIViewController {
         var button = UIButton(type: .system)
         button.setTitle("Другое задание", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 25)
-//        button.configuration?.titleLineBreakMode = .byWordWrapping
-        button.layer.cornerRadius = 40
+        button.titleLabel?.font = UIFont(name: "AcsiomaSuperShockC", size: 25)
+        button.layer.cornerRadius = view.frame.height / 20
         button.contentMode = .scaleAspectFit
         button.backgroundColor = .purple
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +41,7 @@ class GameEndViewController: UIViewController {
         var label = UILabel()
         label.text = "Проигравший выполняет задание"
         label.textColor = .black
-        label.font = .boldSystemFont(ofSize: 25)
+        label.font = UIFont(name: "AcsiomaSuperShockC", size: 25)
         label.contentMode = .scaleAspectFit
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -54,8 +53,8 @@ class GameEndViewController: UIViewController {
     private lazy var exerciseLabel: UILabel = {
         var label = UILabel()
         label.text = model.setPunishment()
-        label.textColor = .systemMint
-        label.font = .boldSystemFont(ofSize: 35)
+        label.textColor = .purple
+        label.font = .boldSystemFont(ofSize: 30)
         label.contentMode = .scaleAspectFit
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -66,7 +65,7 @@ class GameEndViewController: UIViewController {
     private lazy var bangImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(named: "bang")
-        image.contentMode = .scaleToFill
+        image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -89,28 +88,32 @@ class GameEndViewController: UIViewController {
     }
     
     private func setupContraints() {
-        playAgainButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
+        playAgainButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         playAgainButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        playAgainButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        playAgainButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        playAgainButton.heightAnchor.constraint(equalToConstant: view.frame.height / 10).isActive = true
+        playAgainButton.widthAnchor.constraint(equalToConstant: view.frame.width - 120).isActive = true
         
-        nextExerciseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nextExerciseButton.bottomAnchor.constraint(equalTo: playAgainButton.topAnchor, constant: -20).isActive = true
-        nextExerciseButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        nextExerciseButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        nextExerciseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nextExerciseButton.heightAnchor.constraint(equalToConstant: view.frame.height / 10).isActive = true
+        nextExerciseButton.widthAnchor.constraint(equalToConstant: view.frame.width - 120).isActive = true
         
-        firstLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        firstLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        firstLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        firstLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        exerciseLabel.bottomAnchor.constraint(equalTo: nextExerciseButton.topAnchor).isActive = true
+        exerciseLabel.topAnchor.constraint(equalTo: bangImage.bottomAnchor).isActive = true
+        exerciseLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        exerciseLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         
-        exerciseLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        exerciseLabel.bottomAnchor.constraint(equalTo: nextExerciseButton.topAnchor, constant: -30).isActive = true
-        exerciseLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        exerciseLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-
         bangImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        bangImage.bottomAnchor.constraint(equalTo: exerciseLabel.topAnchor, constant: -30).isActive = true
+        bangImage.heightAnchor.constraint(equalToConstant: view.frame.height / 3).isActive = true
+        bangImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        bangImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        firstLabel.bottomAnchor.constraint(equalTo: bangImage.topAnchor).isActive = true
+        firstLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        firstLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        firstLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        
+
         
     }
     

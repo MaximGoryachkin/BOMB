@@ -26,7 +26,6 @@ class MainViewController: UIViewController {
         newSettingsButton.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
         let logoSettingsImage = UIImage(named: "settings")
         newSettingsButton.setImage(logoSettingsImage, for: .normal)
-        //newSettingsButton.setTitle("1", for: .normal)
         newSettingsButton.addTarget(self, action: #selector(settingsGameBtn), for: .touchUpInside)
         return newSettingsButton
     }()
@@ -189,7 +188,7 @@ class MainViewController: UIViewController {
             stackVertView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             stackVertView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             stackVertView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            stackVertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            stackVertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
         //stackVertImageView constraint (boombLable, boombLableSecond)
         NSLayoutConstraint.activate([

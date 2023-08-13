@@ -73,11 +73,16 @@ class GameViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.setRightBarButton(UIBarButtonItem(), animated: false)
         navigationItem.title = "ИГРА"
-        startButton.isHidden = false
         animationInPause = false
         animationIsEnd = false
         roundTime = 30
-        labelText.text = "Нажмите «‎Запустить»‎, чтобы начать игру"
+        if !model.resultArray.isEmpty {
+            startButton.isHidden = false
+            labelText.text = "Нажмите «‎Запустить»‎, чтобы начать игру"
+        } else {
+            startButton.isHidden = true
+            labelText.text = model.setQuestion()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

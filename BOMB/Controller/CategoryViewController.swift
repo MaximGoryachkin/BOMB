@@ -268,37 +268,27 @@ class CategoryViewController: UIViewController {
 //    }
     
     @objc func categoriesOneAction() {
-//        deleteCheckMark(sender: self.firstCategoriesBtn)
         delegate.updateModel(for: Category.multfilm.rawValue)
-        firstCategoriesBtn.isPressed.toggle()
         firstCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesTwoAction(){
-//        deleteCheckMark(sender: self.secondCategoriesBtn)
         delegate.updateModel(for: Category.geography.rawValue)
-        secondCategoriesBtn.isPressed.toggle()
         secondCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesThreeAction(){
-//        deleteCheckMark(sender: self.thirdCategoriesBtn)
         delegate.updateModel(for: Category.science.rawValue)
-        thirdCategoriesBtn.isPressed.toggle()
         thirdCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesFourAction(){
-//        deleteCheckMark(sender: self.fourthCategoriesBtn)
         delegate.updateModel(for: Category.videogame.rawValue)
-        fourthCategoriesBtn.isPressed.toggle()
         fourthCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesFiveAction(){
-//        deleteCheckMark(sender: self.fifthCategoriesBtn)
         delegate.updateModel(for: Category.other.rawValue)
-        fifthCategoriesBtn.isPressed.toggle()
         fifthCategoriesBtn.setChekMark()
     }
     

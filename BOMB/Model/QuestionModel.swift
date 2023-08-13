@@ -157,7 +157,6 @@ struct QuestionModel {
         default:
             print("Not match")
         }
-        print(scienceCategorie.isChoose)
     }
     
     mutating func setPunishment() -> String {

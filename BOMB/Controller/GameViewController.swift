@@ -80,7 +80,7 @@ class GameViewController: UIViewController {
             startButton.isHidden = false
             labelText.text = "Нажмите «‎Запустить»‎, чтобы начать игру"
         } else {
-            startButton.isHidden = true
+            startButton.isEnabled = false
             labelText.text = model.setQuestion()
         }
     }

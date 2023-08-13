@@ -255,7 +255,7 @@ class MainViewController: UIViewController {
     
     @objc func categoriesGameBtn(){
         let categoryVC = CategoryViewController()
-        //categoryVC.delegate = self
+        categoryVC.delegate = self
         navigationController?.pushViewController(categoryVC, animated: true)
     }
     
@@ -272,6 +272,10 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: CheckCategoryProtocol {
+    func setInageForButton(category: Category) -> String {
+        model.setImageForButton(category: category)
+    }
+    
     func updateModel(for name: String) {
         model.update(categoryName: name)
     }

@@ -4,6 +4,7 @@
 //
 //  Created by Максим Горячкин on 08.08.2023.
 //
+import Foundation
 
 struct QuestionModel {
     var multfilmCategorie = QuestionCategory(category: .multfilm,
@@ -23,7 +24,7 @@ struct QuestionModel {
                                                          "Как проводили лето Финес и Ферб?",
                                                          "Мультфильм с возрастным ограничением 16+"],
                                              isChoose: true,
-                                             imageName: nil)
+                                             imageName: "🐶")
     var geographyCategorie = QuestionCategory(category: .geography,
                                               questions: ["Представитель фауны Австралии",
                                                           "Гора Европы",
@@ -41,7 +42,7 @@ struct QuestionModel {
                                                           "Назовите остров Японии",
                                                           "Назовите столицу африканскиой страны"],
                                               isChoose: true,
-                                              imageName: nil)
+                                              imageName: "🧭")
     var scienceCategorie = QuestionCategory(category: .science,
                                             questions: ["Самая классная область науки",
                                                         "Назовите знаменитого ученого",
@@ -60,26 +61,26 @@ struct QuestionModel {
                                                         "Назови число, равное 2 в любой степени"
                                                        ],
                                             isChoose: true,
-                                            imageName: nil)
+                                            imageName: "🔬")
     var videogameCategory = QuestionCategory(category: .videogame,
                                              questions: ["Персонаж восьмибитной игры",
                                                          "Шутер от первого лица",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         "",
-                                                         ""
+                                                         "Игры жанра «MMORPG»",
+                                                         "Назовите персонажей игры «The Wolf Among Us»",
+                                                         "Назовите персонажей игры Genshin Impact",
+                                                         "Перечислите игры в жанре «интерактивное кино»",
+                                                         "Назовите игры, в которые можно было поиграть на приставке «Dendy»",
+                                                         "Назовите игры, где главным героем является детектив",
+                                                         "В каких играх главный герой - ребенок?",
+                                                         "Назовите игры в жанре «Визуальная новелла»",
+                                                         "Перечислите игры-платформеры",
+                                                         "В каких играх есть книги, которые игрок может читать?",
+                                                         "Перечислите расы из вселенной The Elder Scrolls",
+                                                         "Назовите игры про Покемонов",
+                                                         "В каких играх есть лошади?"
                                                         ],
                                              isChoose: true,
-                                             imageName: nil)
+                                             imageName: "🕹️")
     var otherCategory = QuestionCategory(category: .other,
                                          questions: ["Назовите домашнее животное",
                                                      "Перечислите числа Фибоначчи",
@@ -98,7 +99,7 @@ struct QuestionModel {
                                                      "Назовите фильм, снятый по мотивам литературных произведений"
                                                     ],
                                          isChoose: true,
-                                         imageName: nil)
+                                         imageName: "🌚")
     
     
     var punishments = [
@@ -115,6 +116,16 @@ struct QuestionModel {
     ]
     
     var resultArray = [String]()
+    
+    func setImageForButton(category: Category) -> String {
+        switch category {
+        case .multfilm: return multfilmCategorie.imageName
+        case .geography: return geographyCategorie.imageName
+        case .science: return scienceCategorie.imageName
+        case .videogame: return videogameCategory.imageName
+        case .other: return otherCategory.imageName
+        }
+    }
     
     mutating func setQuestion() -> String {
         guard let index = (0..<resultArray.count).randomElement() else { return "Question is end" }
@@ -150,8 +161,7 @@ struct QuestionModel {
     }
     
     mutating func setPunishment() -> String {
-        guard let index = (0..<punishments.count).randomElement() else { return "Punishments is end" }
-        return punishments.remove(at: index)
+        punishments.randomElement() ?? "Punishments is end"
     }
     
 }

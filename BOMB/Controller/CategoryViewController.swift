@@ -11,7 +11,7 @@ class CategoryViewController: UIViewController {
     let heightBtn: CGFloat = 200
     let widthBtn: CGFloat = 200
     let btnsHeightText: CGFloat = 25
-var delegate: CheckCategoryProtocol!
+    var delegate: CheckCategoryProtocol!
     var buttons: [CustomButton] = []
     
     lazy var background: UIImageView = {
@@ -74,10 +74,13 @@ var delegate: CheckCategoryProtocol!
     
     lazy var firstCategoriesBtn: CustomButton = {
         //тестовая картинка
-        let categoriesOne = CustomButton(categoryImage: "qest", frame: CGRect(x: 1, y: 1, width: 1, height: 1), isPressed: false)
+        let categoriesOne = CustomButton(categoryImage: delegate.setInageForButton(category: .multfilm),
+                                         frame: CGRect(x: 1, y: 1, width: 1, height: 1),
+                                         isPressed: true,
+                                         category: .multfilm)
         categoriesOne.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
-//        categoriesOne.frame.size.width = widthBtn
-//        categoriesOne.frame.size.height = heightBtn
+        //        categoriesOne.frame.size.width = widthBtn
+        //        categoriesOne.frame.size.height = heightBtn
         categoriesOne.layer.cornerRadius = 10
         categoriesOne.layer.borderWidth = 3.0
         categoriesOne.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
@@ -87,10 +90,13 @@ var delegate: CheckCategoryProtocol!
     }()
     
     lazy var secondCategoriesBtn: CustomButton = {
-        let categoriesTwo = CustomButton(categoryImage: "qest", frame: CGRect(x: 0, y: 0, width: 1, height: 1), isPressed: false)
+        let categoriesTwo = CustomButton(categoryImage: delegate.setInageForButton(category: .geography),
+                                         frame: CGRect(x: 0, y: 0, width: 1, height: 1),
+                                         isPressed: true,
+                                         category: .geography)
         categoriesTwo.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
-//        categoriesTwo.frame.size.width = widthBtn
-//        categoriesTwo.frame.size.height = heightBtn
+        //        categoriesTwo.frame.size.width = widthBtn
+        //        categoriesTwo.frame.size.height = heightBtn
         categoriesTwo.layer.cornerRadius = 10
         categoriesTwo.layer.borderWidth = 3.0
         categoriesTwo.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
@@ -101,7 +107,10 @@ var delegate: CheckCategoryProtocol!
     
     lazy var thirdCategoriesBtn: CustomButton = {
         //width: 1, height: 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        let categoriesThree = CustomButton(categoryImage: "qest", frame: CGRect(x: 0, y: 0, width: 1, height: 1), isPressed: false)
+        let categoriesThree = CustomButton(categoryImage: delegate.setInageForButton(category: .science),
+                                           frame: CGRect(x: 0, y: 0, width: 1, height: 1),
+                                           isPressed: true,
+                                           category: .science)
         categoriesThree.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         categoriesThree.frame.size.width = widthBtn
         categoriesThree.frame.size.height = heightBtn
@@ -115,7 +124,10 @@ var delegate: CheckCategoryProtocol!
     
     lazy var fourthCategoriesBtn: CustomButton = {
         //width: 1, height: 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        let categoriesFour = CustomButton(categoryImage: "qest", frame: CGRect(x: 0, y: 0, width: 1, height: 1), isPressed: false)
+        let categoriesFour = CustomButton(categoryImage: delegate.setInageForButton(category: .videogame),
+                                          frame: CGRect(x: 0, y: 0, width: 1, height: 1),
+                                          isPressed: true,
+                                          category: .videogame)
         categoriesFour.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         categoriesFour.frame.size.width = widthBtn
         categoriesFour.frame.size.height = heightBtn
@@ -128,7 +140,10 @@ var delegate: CheckCategoryProtocol!
     }()
     
     lazy var fifthCategoriesBtn: CustomButton = {
-        let categoriesFive = CustomButton(categoryImage: "qest", frame: CGRect(x: 0, y: 0, width: 150, height: 150), isPressed: false)
+        let categoriesFive = CustomButton(categoryImage: delegate.setInageForButton(category: .other),
+                                          frame: CGRect(x: 0, y: 0, width: 150, height: 150),
+                                          isPressed: true,
+                                          category: .other)
         categoriesFive.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         categoriesFive.frame.size.width = widthBtn
         categoriesFive.frame.size.height = heightBtn
@@ -141,7 +156,8 @@ var delegate: CheckCategoryProtocol!
     }()
     //скрыта
     lazy var sixthCategoriesBtn: CustomButton = {
-        let categoriesSix = CustomButton(categoryImage: "qest", frame: CGRect(x: 0, y: 0, width: 1, height: 1), isPressed: false)
+        let categoriesSix = CustomButton(categoryImage: "qest", frame: CGRect(x: 0, y: 0, width: 1, height: 1), isPressed: true,
+                                         category: .geography)
         categoriesSix.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
         categoriesSix.frame.size.width = widthBtn
         categoriesSix.frame.size.height = heightBtn
@@ -166,6 +182,10 @@ var delegate: CheckCategoryProtocol!
         addViewInStack(stack: stackHorizViewTwo, views: thirdCategoriesBtn, fourthCategoriesBtn)
         addViewInStack(stack: stackHorizViewThree, views: fifthCategoriesBtn, sixthCategoriesBtn)
         addArrayButtons()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
     
     func addArrayButtons(){
@@ -224,10 +244,6 @@ var delegate: CheckCategoryProtocol!
         }
     }
     
-
-    
-    
-    
     func addViews(views: UIView...){
         for view in views {
             self.view.addSubview(view)
@@ -240,54 +256,55 @@ var delegate: CheckCategoryProtocol!
         }
     }
     
-    func deleteCheckMark(sender: CustomButton){
-        for button in buttons {
-                if button.isPressed {
-                    button.isPressed = !button.isPressed
-                    button.setChekMark()
-                }
-        }
-        sender.isPressed = !sender.isPressed
-        sender.setChekMark()
-    }
+//    func deleteCheckMark(sender: CustomButton){
+//        for button in buttons {
+//            if button.isPressed {
+//                button.isPressed.toggle()
+//                button.setChekMark()
+//            }
+//        }
+//        sender.isPressed = !sender.isPressed
+//        sender.setChekMark()
+//    }
     
-    @objc func categoriesOneAction(){
-        deleteCheckMark(sender: self.firstCategoriesBtn)
-        print("firstCatigory")
+    @objc func categoriesOneAction() {
+//        deleteCheckMark(sender: self.firstCategoriesBtn)
+        delegate.updateModel(for: Category.multfilm.rawValue)
+        firstCategoriesBtn.isPressed.toggle()
+        firstCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesTwoAction(){
-        deleteCheckMark(sender: self.secondCategoriesBtn)
-        print("SecondCatigory")
+//        deleteCheckMark(sender: self.secondCategoriesBtn)
+        delegate.updateModel(for: Category.geography.rawValue)
+        secondCategoriesBtn.isPressed.toggle()
+        secondCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesThreeAction(){
-        deleteCheckMark(sender: self.thirdCategoriesBtn)
-        print("ThirdCatigory")
+//        deleteCheckMark(sender: self.thirdCategoriesBtn)
+        delegate.updateModel(for: Category.science.rawValue)
+        thirdCategoriesBtn.isPressed.toggle()
+        thirdCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesFourAction(){
-        deleteCheckMark(sender: self.fourthCategoriesBtn)
-        print("FourthCatigory")
+//        deleteCheckMark(sender: self.fourthCategoriesBtn)
+        delegate.updateModel(for: Category.videogame.rawValue)
+        fourthCategoriesBtn.isPressed.toggle()
+        fourthCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesFiveAction(){
-        deleteCheckMark(sender: self.fifthCategoriesBtn)
-        print("FifthCatigory")
+//        deleteCheckMark(sender: self.fifthCategoriesBtn)
+        delegate.updateModel(for: Category.other.rawValue)
+        fifthCategoriesBtn.isPressed.toggle()
+        fifthCategoriesBtn.setChekMark()
     }
     
     @objc func categoriesSixAction(){
         print("SixthCatigory")
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
 

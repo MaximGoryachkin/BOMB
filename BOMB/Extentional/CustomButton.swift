@@ -15,12 +15,15 @@ class CustomButton: UIButton {
     }()
     
     var isPressed: Bool
+    var category: Category
     
-    init(categoryImage: String, frame: CGRect, isPressed: Bool) {
+    init(categoryImage: String, frame: CGRect, isPressed: Bool, category: Category) {
         self.isPressed = isPressed
+        self.category = category
         super.init(frame: frame)
         self.addSubview(checkMarkImage)
-        self.setImage(UIImage(named: categoryImage), for: .normal)
+        self.setTitle(categoryImage, for: .normal)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 60)
         setCheckMarkValue()
         setChekMark()
     }

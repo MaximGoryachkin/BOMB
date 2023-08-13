@@ -7,4 +7,5 @@
 
 protocol CheckCategoryProtocol: AnyObject {
     func updateModel(for name: String)
+    func setInageForButton(category: Category) -> String
 }

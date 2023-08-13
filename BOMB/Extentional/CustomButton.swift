@@ -21,11 +21,15 @@ class CustomButton: UIButton {
         super.init(frame: frame)
         self.addSubview(checkMarkImage)
         self.setImage(UIImage(named: categoryImage), for: .normal)
+        setCheckMarkValue()
+        setChekMark()
+    }
+    
+    func setCheckMarkValue(){
         checkMarkImage.frame.size.width = self.frame.width/6
         checkMarkImage.frame.size.height = self.frame.height/6
-        checkMarkImage.frame.origin.x = 10
-        checkMarkImage.frame.origin.y = 10
-        setChekMark()
+        checkMarkImage.frame.origin.x = self.layer.cornerRadius/2+1
+        checkMarkImage.frame.origin.y = self.layer.cornerRadius/2+1
     }
  
     func setChekMark(){

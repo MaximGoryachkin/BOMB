@@ -11,6 +11,8 @@ class CategoryViewController: UIViewController {
     let heightBtn: CGFloat = 200
     let widthBtn: CGFloat = 200
     let btnsHeightText: CGFloat = 25
+var delegate: CheckCategoryProtocol!
+    var buttons: [CustomButton] = []
     
     lazy var background: UIImageView = {
         let backgroundImageView = UIImageView()
@@ -37,10 +39,12 @@ class CategoryViewController: UIViewController {
     lazy var stackHorizViewOne: UIStackView = {
         let stackHorizontalView = UIStackView()
         stackHorizontalView.axis = .horizontal
-        stackHorizontalView.distribution = .equalCentering
-        stackHorizontalView.alignment = .center
-        stackHorizontalView.spacing = 50
+        stackHorizontalView.distribution = .fill
+        stackHorizontalView.alignment = .fill
+        stackHorizontalView.spacing = 20
         stackHorizontalView.backgroundColor = .clear //free
+        //stackHorizontalView.contentMode = .scaleToFill
+        //stackHorizontalView.
         
         //self.view.addSubview(stackHorizontalView)
         return stackHorizontalView
@@ -48,9 +52,9 @@ class CategoryViewController: UIViewController {
     lazy var stackHorizViewTwo: UIStackView = {
         let stackHorizontalView = UIStackView()
         stackHorizontalView.axis = .horizontal
-        stackHorizontalView.distribution = .equalCentering
-        stackHorizontalView.alignment = .center
-        stackHorizontalView.spacing = 50
+        stackHorizontalView.distribution = .fill
+        stackHorizontalView.alignment = .fill
+        stackHorizontalView.spacing = 20
         stackHorizontalView.backgroundColor = .clear //free
         
         //self.view.addSubview(stackHorizontalView)
@@ -59,9 +63,9 @@ class CategoryViewController: UIViewController {
     lazy var stackHorizViewThree: UIStackView = {
         let stackHorizontalView = UIStackView()
         stackHorizontalView.axis = .horizontal
-        stackHorizontalView.distribution = .equalCentering
-        stackHorizontalView.alignment = .center
-        stackHorizontalView.spacing = 50
+        stackHorizontalView.distribution = .fill
+        stackHorizontalView.alignment = .fill
+        stackHorizontalView.spacing = 20
         stackHorizontalView.backgroundColor = .clear //free
         
         //self.view.addSubview(stackHorizontalView)
@@ -70,10 +74,10 @@ class CategoryViewController: UIViewController {
     
     lazy var firstCategoriesBtn: CustomButton = {
         //тестовая картинка
-        let categoriesOne = CustomButton(categoryImage: "qest", frame: CGRect(x: 1, y: 1, width: 150, height: 150), isPressed: false)
+        let categoriesOne = CustomButton(categoryImage: "qest", frame: CGRect(x: 1, y: 1, width: 1, height: 1), isPressed: false)
         categoriesOne.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
-        categoriesOne.frame.size.width = widthBtn
-        categoriesOne.frame.size.height = heightBtn
+//        categoriesOne.frame.size.width = widthBtn
+//        categoriesOne.frame.size.height = heightBtn
         categoriesOne.layer.cornerRadius = 10
         categoriesOne.layer.borderWidth = 3.0
         categoriesOne.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
@@ -83,12 +87,11 @@ class CategoryViewController: UIViewController {
     }()
     
     lazy var secondCategoriesBtn: CustomButton = {
-        let categoriesTwo = CustomButton(categoryImage: "qest", frame: CGRect(x: 0, y: 0, width: 150, height: 150), isPressed: false)
+        let categoriesTwo = CustomButton(categoryImage: "qest", frame: CGRect(x: 0, y: 0, width: 1, height: 1), isPressed: false)
         categoriesTwo.backgroundColor = UIColor(red: 0x82, green: 0x15, blue: 0xC2)
-        categoriesTwo.frame.size.width = widthBtn
-        categoriesTwo.frame.size.height = heightBtn
+//        categoriesTwo.frame.size.width = widthBtn
+//        categoriesTwo.frame.size.height = heightBtn
         categoriesTwo.layer.cornerRadius = 10
-       // categoriesTwo.setCheckMarkValue()
         categoriesTwo.layer.borderWidth = 3.0
         categoriesTwo.layer.borderColor = UIColor(red: 0x2A, green: 0x14, blue: 0x68).cgColor
         categoriesTwo.addTarget(self, action: #selector(categoriesTwoAction), for: .touchUpInside)
@@ -150,7 +153,10 @@ class CategoryViewController: UIViewController {
         return categoriesSix
     }()
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,12 +165,15 @@ class CategoryViewController: UIViewController {
         addViewInStack(stack: stackHorizViewOne, views: firstCategoriesBtn, secondCategoriesBtn)
         addViewInStack(stack: stackHorizViewTwo, views: thirdCategoriesBtn, fourthCategoriesBtn)
         addViewInStack(stack: stackHorizViewThree, views: fifthCategoriesBtn, sixthCategoriesBtn)
+        addArrayButtons()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationItem.title = "КАТЕГОРИИ"
+    func addArrayButtons(){
+        buttons.append(firstCategoriesBtn)
+        buttons.append(secondCategoriesBtn)
+        buttons.append(thirdCategoriesBtn)
+        buttons.append(fourthCategoriesBtn)
+        buttons.append(fifthCategoriesBtn)
     }
     
     override func viewWillLayoutSubviews(){
@@ -176,13 +185,13 @@ class CategoryViewController: UIViewController {
             //stackVertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
         NSLayoutConstraint.activate([
-            stackHorizViewOne.topAnchor.constraint(equalTo: stackVertView.topAnchor, constant: 0),
+            stackHorizViewOne.topAnchor.constraint(equalTo: stackVertView.topAnchor, constant: 10),
             stackHorizViewOne.leadingAnchor.constraint(equalTo: stackVertView.leadingAnchor, constant: 0),
             stackHorizViewOne.trailingAnchor.constraint(equalTo: stackVertView.trailingAnchor, constant: 0),
-            stackHorizViewOne.heightAnchor.constraint(equalToConstant: 150)//delite
+            //stackHorizViewOne.heightAnchor.constraint(equalToConstant: 160)//delite
         ])
         NSLayoutConstraint.activate([
-            stackHorizViewTwo.topAnchor.constraint(equalTo: stackHorizViewOne.bottomAnchor, constant: 0),
+            stackHorizViewTwo.topAnchor.constraint(equalTo: stackHorizViewOne.bottomAnchor, constant: 20),
             stackHorizViewTwo.leadingAnchor.constraint(equalTo: stackVertView.leadingAnchor, constant: 0),
             stackHorizViewTwo.trailingAnchor.constraint(equalTo: stackVertView.trailingAnchor, constant: 0),
             stackHorizViewTwo.heightAnchor.constraint(equalTo: stackHorizViewOne.heightAnchor)
@@ -190,41 +199,29 @@ class CategoryViewController: UIViewController {
             //stackHorizViewTwo.heightAnchor.constraint(equalToConstant: 150)//delite
         ])
         NSLayoutConstraint.activate([
-            stackHorizViewThree.topAnchor.constraint(equalTo: stackHorizViewTwo.bottomAnchor, constant: 0),
+            stackHorizViewThree.topAnchor.constraint(equalTo: stackHorizViewTwo.bottomAnchor, constant: 20),
             stackHorizViewThree.leadingAnchor.constraint(equalTo: stackVertView.leadingAnchor, constant: 0),
-            //stackHorizViewThree.trailingAnchor.constraint(equalTo: stackVertView.trailingAnchor, constant: 0),
             stackHorizViewThree.heightAnchor.constraint(equalTo: stackHorizViewTwo.heightAnchor)
-            //stackHorizViewThree.heightAnchor.constraint(equalToConstant: 150)//delite
         ])
         //stackHorizViewOne
         NSLayoutConstraint.activate([
-            firstCategoriesBtn.topAnchor.constraint(equalTo: stackHorizViewOne.topAnchor, constant: 10),
-            firstCategoriesBtn.bottomAnchor.constraint(equalTo: stackHorizViewOne.bottomAnchor, constant: -10),
-            firstCategoriesBtn.widthAnchor.constraint(equalTo: firstCategoriesBtn.heightAnchor),
-            secondCategoriesBtn.topAnchor.constraint(equalTo: stackHorizViewOne.topAnchor, constant: 10),
-            secondCategoriesBtn.bottomAnchor.constraint(equalTo: stackHorizViewOne.bottomAnchor, constant: -10),
-            secondCategoriesBtn.widthAnchor.constraint(equalTo: secondCategoriesBtn.heightAnchor)
+            fifthCategoriesBtn.widthAnchor.constraint(equalTo: firstCategoriesBtn.heightAnchor),
+            secondCategoriesBtn.widthAnchor.constraint(equalTo: secondCategoriesBtn.heightAnchor),
         ])
+        
         //stackHorizViewTwo
         NSLayoutConstraint.activate([
-            thirdCategoriesBtn.topAnchor.constraint(equalTo: stackHorizViewTwo.topAnchor, constant: 10),
-            thirdCategoriesBtn.bottomAnchor.constraint(equalTo: stackHorizViewTwo.bottomAnchor, constant: -10),
             thirdCategoriesBtn.widthAnchor.constraint(equalTo: thirdCategoriesBtn.heightAnchor),
-            fourthCategoriesBtn.topAnchor.constraint(equalTo: stackHorizViewTwo.topAnchor, constant: 10),
-            fourthCategoriesBtn.bottomAnchor.constraint(equalTo: stackHorizViewTwo.bottomAnchor, constant: -10),
-            fourthCategoriesBtn.widthAnchor.constraint(equalTo: fourthCategoriesBtn.heightAnchor)
+            fourthCategoriesBtn.widthAnchor.constraint(equalTo: fourthCategoriesBtn.heightAnchor),
         ])
         //stackHorizViewThree
         NSLayoutConstraint.activate([
-            fifthCategoriesBtn.topAnchor.constraint(equalTo: stackHorizViewThree.topAnchor, constant: 10),
-            fifthCategoriesBtn.bottomAnchor.constraint(equalTo: stackHorizViewThree.bottomAnchor, constant: -10),
             fifthCategoriesBtn.widthAnchor.constraint(equalTo: fifthCategoriesBtn.heightAnchor),
-            sixthCategoriesBtn.topAnchor.constraint(equalTo: stackHorizViewThree.topAnchor, constant: 10),
-            sixthCategoriesBtn.bottomAnchor.constraint(equalTo: stackHorizViewThree.bottomAnchor, constant: -10),
-            sixthCategoriesBtn.widthAnchor.constraint(equalTo: sixthCategoriesBtn.heightAnchor)
-
+            sixthCategoriesBtn.widthAnchor.constraint(equalTo: sixthCategoriesBtn.heightAnchor),
         ])
-        view.layoutIfNeeded()
+        for button in buttons {
+            button.setCheckMarkValue()
+        }
     }
     
 
@@ -243,23 +240,39 @@ class CategoryViewController: UIViewController {
         }
     }
     
+    func deleteCheckMark(sender: CustomButton){
+        for button in buttons {
+                if button.isPressed {
+                    button.isPressed = !button.isPressed
+                    button.setChekMark()
+                }
+        }
+        sender.isPressed = !sender.isPressed
+        sender.setChekMark()
+    }
+    
     @objc func categoriesOneAction(){
+        deleteCheckMark(sender: self.firstCategoriesBtn)
         print("firstCatigory")
     }
     
     @objc func categoriesTwoAction(){
+        deleteCheckMark(sender: self.secondCategoriesBtn)
         print("SecondCatigory")
     }
     
     @objc func categoriesThreeAction(){
+        deleteCheckMark(sender: self.thirdCategoriesBtn)
         print("ThirdCatigory")
     }
     
     @objc func categoriesFourAction(){
+        deleteCheckMark(sender: self.fourthCategoriesBtn)
         print("FourthCatigory")
     }
     
     @objc func categoriesFiveAction(){
+        deleteCheckMark(sender: self.fifthCategoriesBtn)
         print("FifthCatigory")
     }
     
@@ -277,3 +290,4 @@ class CategoryViewController: UIViewController {
     */
 
 }
+
